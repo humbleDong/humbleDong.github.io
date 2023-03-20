@@ -240,8 +240,17 @@ div#category {
   padding: 30px;
   margin: 30px 0px 0px 0px;
 }
+body {
+    cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+        default;
+}
+a,
+img {
+    cursor: url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+        default;
+}
 
-/* ���ͼ�� */
+/* ���ͼ��
 body {
   cursor: url("/img/x1.cur"), auto;
 }
@@ -251,7 +260,8 @@ a,
 [type="submit"]:not(:disabled),
 button:not(:disabled) {
   cursor: url("/img/x2.cur"), auto !important;
-}
+} */
+
 /* md��վ�»��� */
 #article-container a:hover {
   text-decoration: none !important;
