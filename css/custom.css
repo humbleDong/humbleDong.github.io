@@ -164,15 +164,6 @@ div#category {
 [data-theme="dark"] div#category {
   background: transparent !important;
 }
-/* ҳ��͸�� */
-#footer {
-  background: transparent !important;
-}
-
-/* ͷͼ͸�� */
-#page-header {
-  background: transparent !important;
-}
 
 #rightside > div > button {
   border-radius: 5px;
