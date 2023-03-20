@@ -132,6 +132,16 @@ div#category {
   background: rgba(255, 255, 255, 0.9);
 }
 
+/* ҳ��͸�� */
+#footer {
+  background: transparent !important;
+}
+
+/* ͷͼ͸�� */
+#page-header {
+  background: transparent !important;
+}
+
 /*ҹ��ģʽα�����ֲ�͸��*/
 [data-theme="dark"] #recent-posts > .recent-post-item {
   background: #121212;
