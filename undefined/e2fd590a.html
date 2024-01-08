@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>SpringBoot调试与单元测试 | 七岁就很浪</title><meta name="keywords" content="SpringBoot3"><meta name="author" content="小东"><meta name="copyright" content="小东"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="SpringBoot调试与单元测试"><meta name="application-name" content="SpringBoot调试与单元测试"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="SpringBoot调试与单元测试"><meta property="og:url" content="https://humbledong.github.io/undefined/e2fd590a.html"><meta property="og:site_name" content="七岁就很浪"><meta property="og:description" content="SpringBoot调试与单元测试断点调试使用main方法启动调试根据SpringBoot项目不同的启动方式，断点调试的方式也不一样。 如果直接使用main方法启动应用，那么选择Debug模式启动即可：  当代码运行到断点处就可以进行调试了。 使用Maven插件启动测试使用main方法启动调试有一定"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s2.loli.net/2024/01/08/yBoXGRVkvzJEHin.webp"><meta property="article:author" content="小东"><meta property="article:tag" content="七岁就很浪博客"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s2.loli.net/2024/01/08/yBoXGRVkvzJEHin.webp"><meta name="description" content="SpringBoot调试与单元测试断点调试使用main方法启动调试根据SpringBoot项目不同的启动方式，断点调试的方式也不一样。 如果直接使用main方法启动应用，那么选择Debug模式启动即可：  当代码运行到断点处就可以进行调试了。 使用Maven插件启动测试使用main方法启动调试有一定"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://humbledong.github.io/undefined/e2fd590a"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🧑‍💻 IT行业从业者","🔍 分享与热心帮助","🐟️ 授人以渔不以鱼","🎹 捕捉人间好音乐"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 小东","link":"链接: ","source":"来源: 七岁就很浪","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '七岁就很浪',
+  title: 'SpringBoot调试与单元测试',
+  postAI: '',
+  pageFillDescription: 'SpringBoot调试与单元测试, 断点调试, 使用main方法启动调试, 使用Maven插件启动测试, 1.	启用调试模式, 2.	远程调试, 开发者工具, 概述, 默认值, 自动重启, 1.	概述, 2.	触发机制, 3.	排除资源, 4.	禁用日志报告, 5.	禁用自动重启, 实时重载, 全局配置, 单元测试, 概述, 真实环境测试, Mock环境测试, Mock组件测试, 技术框架测试调试与单元测试断点调试使用方法启动调试根据项目不同的启动方式断点调试的方式也不一样如果直接使用方法启动应用那么选择模式启动即可当代码运行到断点处就可以进行调试了使用插件启动测试使用方法启动调试有一定的缺陷因为启动应用时不能使用的相关插件比如不能使用资源插件过滤配置资源导致无法过滤参数占位符而导致应用启动失败所以实际项目中使用插件启动应用的方式较多使用插件启动应用它会一个子进程来运行应用所以它不能像方法那样直接启动调试而需要像调试远程应用一样调试断点调试起来略显麻烦首先需要在插件中配置调试参数启动应用然后新建一个远程调试启用调试模式启用调试模式有以下两种方式在插件配置中指定调试模式的参数使用命令启动时候指定调试模式的参数完整运行命令如下主流的开发工具都集成了插件无需关键字否则可能运行出错一般建议在命令行指定参数进入调试模式只有在需要的时候启用调试远程调试在中新建一个调试任务主流的开发工具都是支持的为了和上一步的启动项进行区分这里将对应的远程调试命名为一般只需要确定和参数然后使用模式启动该调试任务控制台胡显示已经连接成功的日志一旦连接成功上一步的启动项才会继续完成启动之后就可以打断点调试了开发者工具概述提供了一系列开发者工具主要用于应用开发阶段作用包括自动禁用缓存支持应用自动重启实时重载等使用开发者工具可以大大提高开发效率只需要引入开发者工具依赖即可启用开发者工具其中表示该依赖只能在本项目及其子项目中传递而不会传递到引用该项目的项目中其他项目需要主动引入该依赖才行开发者工具是在开发阶段使用的所以打包应用的时候默认不会把开发者工具打包进去如果有需要也可以通过配置把开发者工具打包进去其中设置为表示不排除开发者工具依赖另外因为开发者工具是开发阶段才使用的工具所以使用命令运行整包时开发者工具会被自动禁用虽然可以通过参数来启用生产环境中的开发者工具但是不建议这样做有安全风险建议不要在生产环境中包含开发者工具默认值下表是开发者工具使用的参数的默认值这里以缓存项为例说明为什么需要默认值的某些功能组件可能会提供缓存这在生产环境中肯定是可以提升性能的但在开发阶段可能因为没有及时生效而排查困难所以开发者共计默认是禁用所有缓存项的如果不想让应用这些开发则工具带来的默认值则可以通过指定参数来禁用默认值自动重启概述开发者工具会监控类路径下的文件一旦有文件发送变更应用就能自动快速重启则不需要手动重启应用自动重启技术使用了两个类加载器基础类加载器用于加载不会变更的文件比如第三方的包重启类加载器用于加载应用类文件这样做的好处就是每次重启只需要创建一个重启类加载器即可基础类加载器已加载好的不用动虽然不能和热部署方式相比但和冷启动相比自动重启技术拥有更高的启动效率注使用切面编程不支持自动重启触发机制自动重启触发机制如下需要重新构建项目才能自动重启构建工具在构建插件中使用命令也可以触发重启默认是手动构建应用的当然也可以开启自动构建应用排除资源某些资源是没必要触发应用自动重启的默认情况下以下目录下的资源不会触发自动重启虽然以上目录下的文件变更不会触发应用自动重启但是会触发应用实时重载也可以达到快速刷新的效果如果不想使用以上默认值则可以通过这里只排除目录下的所有文件它的变更不会触发应用自动重启如果要保留所有的默认目录再添加其他的额外目录则使用参数即可禁用日志报告禁用自动重启实时重载开发者工具支持应用文件变更后网页实时重载内容即不需要手动刷新页面当类路径下的资源发生变更时可以出发浏览器自动刷新自动刷新的前提是浏览器安装扩展插件即可前面讲过那几个目录只要一更改就会触发重载关闭实时重载配置全局配置在实际开发中同时开发的项目可能非常多现在都是微服务多模块开发一个服务就是一个模块即一个项目如果逐个地配置是在太麻烦可以全局配置全局配置文件位于目录下配置文件名为支持两种配置文件类型默认指的是用户的主目录如果需要自定义这个目录则可以通过一下两种方式设置设置环境变了设置系统参数比如这样一个全局配置文件禁用了自动重启日志报告以及指定了一个触发文件建议使用全局配置文件这样就不用在每个项目中单独配置开发者工具了需要注意的是配置文件不支持任何基于的配置如果项目同时设计新老版本开发则可以使用配置文件新老版本都可以兼容这种文件比如注意配置不能带双引号单元测试概述提供了丰富的测试功能主要由以下两个模块组成提供测试核心功能提供对测试的自动配置提供了一个一站式启动器测试启动器依赖不仅包含以上两个模块还包含测试模块以及其他第三方测试类库最流行的单元测试框架一款快速断言库一款单元测试匹配库一款测试框架一款断言库一款库以上这些都是提供的常用的测试类库如果上面的测试类库还不能满足你的需要也可以任意添加以上没有的类库现在基本上使用的是如果应用还在使用写的单元测试用例那么也可以使用的引擎来运行如下面的配置需要排除依赖因为依赖坐标已经改了并且默认内置在依赖管理中如上面的依赖关系树所示最新的依赖已经是坐标了提供了一个注解用在单元测试雷伤以启用支持特性的单元测试如果使用的是那么测试类上还需要额外添加注解然后在测试类方法上加上注解即可每一个注解修饰的方法就是一个单元测试方法注解有一个最重要的环境参数支持以下几种环境设置默认加载一个并提供了一个但不会自动内嵌容器并可以结合和注解一起使用进行测试加载一个以及提供一个真实的并以随机端口启动内嵌服务器和一样不同的是是一应用指定的端口运行的默认是加载一个但不会提供任何如果使用的注解不带任何参数则默认为环境真实环境测试在注解中指定基于随机端口的真实环境然后在类成员变量或者方法参数上注入实例就可以完成对接口的真实环境测试七岁就很浪测试当前应用下的接口传入对应的用户名参数最后检查接口返回结果是否和预期一致测试结果如下单元测试通过从执行日志可以看到它启动了一个嵌入式的容器来测试真实的环境环境测试通过在类上面使用注解然后在类成员变量或者方法参数上注入实例就可以完成对接口的测试基于默认的环境的测试测试一下当前应用下的接口传入对应的参数名最后检查请求状态是否响应的内容是否和预期一致测试结果如下单元测试通过从执行日志中可以看到它并未启动真实的环境来测试而是使用环境测试的组件测试某些时候可能还需要模拟一些组件比如某些服务只有上线之后才能调用在开发阶段不可用这是就需要模拟测试了提供各种模拟组件以完成测试提供了一个注解可为中的组件定义基于的测试他可以创建一个新以覆盖环境中已有的它可以用在测试类成员变量上或者配置类成员变量上被模拟的每次测试结束后自动重置假设现在有一个远程服务的本地不能调用现在进行测试如以下使用示例这里的注解使用在变量上表明这个实例在当前测试用例中是被覆盖的如果要模拟的有多个则可以使用注解指定然后通过提供的代理工具类方法创建模拟返回数据运行该服务的测试方法当模拟数据和预期结果一致时才会通过测试这里通过工具类模拟方法让他返回统计的用户总数最后检查该方法的返回值是否和预期值一致测试结果如下单元测试通过也可以使用注解代替注解两者区别如果没有提供代理方法则会调用真实的来获取数据不管有没有提供代理方法都会调用的来获取数据注解既可以作用于环境也可以作用于真实环境它只是用来模拟替换环境总指定的而已但不能用于模拟在应用上下文刷新期间的行为因为在执行测试用例时应用上下文已经刷新完成了所以不可能再去模拟了这种情况建议使用方法来创建模拟配置技术框架测试除了支持环境的单元测试还提供了各种技术组件的单元测试配置比如等比如想测试反序列化序列化功能其自动配置类为它提供了对各个框架的支持只修要在单元测试类上添加一个注解注入对应的实例就可以直接测试首先在资源目录下创建一个文件文件内容如下以下就是使用序列化反序列化的测试这里提供了两个测试方法测试序列化功能判断序列化后的内容和资源目录下的文件的内容是否一致是否有这个字段并且这个字段是否是测试反序列化功能判断反序列化后的用户对象和新创建的用户对象是否一致并且反序列化后的用户对象值是否为测试结果更多技术框架的自动配置可以参考测试自动配置包中的自动配置文件比如上面的序列化和反序列化功能它注册了所支持的几种工具类的自动配置如下这里可以看到测试支持的自动配置类以及框架的自动配置类都在此处进行了注册',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-08 14:59:54',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="七岁就很浪" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">我的</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.cnblogs.com/qisui/" title="博客园"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/blog.ico" alt="博客园"/><span class="back-menu-item-text">博客园</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">常用</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.processon.com/" title="processon画图"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/processon.ico" alt="processon画图"/><span class="back-menu-item-text">processon画图</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">七岁就很浪</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/2TQtWAnv8Of1ykp.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOF/" style="font-size: 1.05rem;">AOF<sup>1</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Ajax/" style="font-size: 1.05rem;">Ajax<sup>1</sup></a><a href="/tags/Druid/" style="font-size: 1.05rem;">Druid<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>2</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSON/" style="font-size: 1.05rem;">JSON<sup>1</sup></a><a href="/tags/JSP/" style="font-size: 1.05rem;">JSP<sup>1</sup></a><a href="/tags/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.05rem;">Java多线程<sup>1</sup></a><a href="/tags/Java%E8%BF%9B%E9%98%B6/" style="font-size: 1.05rem;">Java进阶<sup>2</sup></a><a href="/tags/Linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" style="font-size: 1.05rem;">Linux基本命令<sup>1</sup></a><a href="/tags/Linux%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">Linux基础<sup>1</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>1</sup></a><a href="/tags/MyBatis-plus/" style="font-size: 1.05rem;">MyBatis-plus<sup>2</sup></a><a href="/tags/MySQL%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">MySQL基础<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 1.05rem;">Mybatis<sup>1</sup></a><a href="/tags/RDB/" style="font-size: 1.05rem;">RDB<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>2</sup></a><a href="/tags/Servlet/" style="font-size: 1.05rem;">Servlet<sup>1</sup></a><a href="/tags/Shiro/" style="font-size: 1.05rem;">Shiro<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a><a href="/tags/SpringBoot-CRUD/" style="font-size: 1.05rem;">SpringBoot-CRUD<sup>1</sup></a><a href="/tags/SpringBoot3/" style="font-size: 1.05rem;">SpringBoot3<sup>10</sup></a><a href="/tags/SpringBoot%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">SpringBoot原理<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 1.05rem;">SpringMVC<sup>1</sup></a><a href="/tags/SpringSecurity/" style="font-size: 1.05rem;">SpringSecurity<sup>1</sup></a><a href="/tags/Spring%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">Spring事务<sup>1</sup></a><a href="/tags/Swagger/" style="font-size: 1.05rem;">Swagger<sup>1</sup></a><a href="/tags/Thymeleaf/" style="font-size: 1.05rem;">Thymeleaf<sup>1</sup></a><a href="/tags/Tomcat/" style="font-size: 1.05rem;">Tomcat<sup>1</sup></a><a href="/tags/Yaml/" style="font-size: 1.05rem;">Yaml<sup>1</sup></a><a href="/tags/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 1.05rem;">cron表达式<sup>1</sup></a><a href="/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 1.05rem;">代码生成器<sup>1</sup></a><a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" style="font-size: 1.05rem;">国际化<sup>1</sup></a><a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">安全<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6task/" style="font-size: 1.05rem;">定时task<sup>1</sup></a><a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 1.05rem;">年度总结<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5task/" style="font-size: 1.05rem;">异步task<sup>1</sup></a><a href="/tags/%E6%8B%A6%E6%88%AA%E5%99%A8/" style="font-size: 1.05rem;">拦截器<sup>2</sup></a><a href="/tags/%E9%82%AE%E4%BB%B6task/" style="font-size: 1.05rem;">邮件task<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">10</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/SpringBoot3/" itemprop="url">SpringBoot3</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/SpringBoot3/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SpringBoot3</span></a></span></div></div><h1 class="post-title" itemprop="name headline">SpringBoot调试与单元测试</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-10-24T06:14:20.000Z" title="发表于 2023-10-24 14:14:20">2023-10-24</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-01-08T06:59:54.098Z" title="更新于 2024-01-08 14:59:54">2024-01-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="SpringBoot调试与单元测试"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s2.loli.net/2024/01/08/yBoXGRVkvzJEHin.webp"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://humbledong.github.io/undefined/e2fd590a.html"><header><a class="post-meta-categories" href="/categories/SpringBoot3/" itemprop="url">SpringBoot3</a><a href="/tags/SpringBoot3/" tabindex="-1" itemprop="url">SpringBoot3</a><h1 id="CrawlerTitle" itemprop="name headline">SpringBoot调试与单元测试</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">小东</span><time itemprop="dateCreated datePublished" datetime="2023-10-24T06:14:20.000Z" title="发表于 2023-10-24 14:14:20">2023-10-24</time><time itemprop="dateCreated datePublished" datetime="2024-01-08T06:59:54.098Z" title="更新于 2024-01-08 14:59:54">2024-01-08</time></header><h1 id="SpringBoot调试与单元测试"><a href="#SpringBoot调试与单元测试" class="headerlink" title="SpringBoot调试与单元测试"></a>SpringBoot调试与单元测试</h1><h2 id="断点调试"><a href="#断点调试" class="headerlink" title="断点调试"></a>断点调试</h2><h3 id="使用main方法启动调试"><a href="#使用main方法启动调试" class="headerlink" title="使用main方法启动调试"></a>使用main方法启动调试</h3><p>根据SpringBoot项目不同的启动方式，断点调试的方式也不一样。</p>
+<p>如果直接使用main方法启动应用，那么选择Debug模式启动即可：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/Z149FmGQ8gHTVwb.png" alt="image-20231213155034931"></p>
+<p>当代码运行到断点处就可以进行调试了。</p>
+<h3 id="使用Maven插件启动测试"><a href="#使用Maven插件启动测试" class="headerlink" title="使用Maven插件启动测试"></a>使用Maven插件启动测试</h3><p>使用main方法启动调试有一定的缺陷，因为启动应用时不能使用Maven的相关插件，比如不能使用Maven资源插件过滤配置资源，导致无法过滤参数占位符而导致应用启动失败，所以实际项目中使用SpringBootMaven插件启动应用的方式较多。</p>
+<p>使用Spring Boot Maven 插件启动应用，它会“fork”一个子进程来运行应用，所以它不能像main方法那样直接”debug”启动调试，而需要像调试远程应用一样调试，断点调试起来略显麻烦。首先需要在Spring Boot Maven插件中配置jvmArguments调试参数启动应用，然后新建一个远程调试。</p>
+<h4 id="1-启用调试模式"><a href="#1-启用调试模式" class="headerlink" title="1.	启用调试模式"></a>1.	启用调试模式</h4><p>启用调试模式有以下两种方式：</p>
+<p>（1）在插件配置中指定调试模式的jvmArguments参数：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">jvmArguments</span>&gt;</span></span><br><span class="line">                -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</span><br><span class="line">            <span class="tag">&lt;/<span class="name">jvmArguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）使用mvn命令启动时候，指定调试模式的jvmArguments参数，完整运行命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mvn spring-boot:run -Despring-boot.run.jvmArguments=<span class="string">&quot;-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>主流的开发工具都集成了Maven插件，无需mvn关键字，否则可能运行出错</p>
+<p>一般建议在命令行指定参数进入调试模式，只有在需要的时候启用调试。</p>
+<h4 id="2-远程调试"><a href="#2-远程调试" class="headerlink" title="2.	远程调试"></a>2.	远程调试</h4><p>在IDE中新建一个Remote调试任务，主流的IDE开发工具都是支持的</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/OTrqVBam7MCbIEQ.png" alt="image-20231213161753673"></p>
+<p>为了和上一步的spring-boot-web启动项进行区分，这里将对应的远程调试命名为spring-boot-web-debug，一般只需要确定host和prot参数，然后使用Debug模式启动该Remote调试任务，Debug控制台胡显示已经连接成功的日志。</p>
+<p>一旦连接成功，上一步的spring-boot-web启动项才会继续完成启动，之后就可以打断点调试了。</p>
+<h3 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>SpringBoot提供了一系列开发者工具，主要用于应用开发阶段，作用包括自动禁用缓存、支持应用自动重启、实时重载等，使用开发者工具可以大大提高开发效率。</p>
+<p>只需要引入开发者工具依赖即可启用开发者工具：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中optional表示该依赖只能在本项目及其子项目中传递，而不会传递到引用该项目的项目中，其他项目需要主动引入该依赖才行。</p>
+<p>开发者工具是在开发阶段使用的，所以，打包应用的时候，SpringBoot默认不会把开发者工具打包进去，如果有需要，也可以通过配置把开发者工具打包进去：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">excludeDevtools</span>&gt;</span>false<span class="tag">&lt;/<span class="name">excludeDevtools</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中excludeDevtools设置为false表示不排除开发者工具依赖。另外，因为开发者工具是开发阶段才使用的工具，所以使用java -jar命令运行整包时，开发者工具会被自动禁用，虽然可以通过-Dspring.devtools.restart.enabled&#x3D;true参数来启用生产环境中的开发者工具，但是不建议这样做，有安全风险，建议不要在生产环境中包含开发者工具。</p>
+<h4 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h4><p>下表是SpringBoot开发者工具使用的参数的默认值：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/TVOqvsAXL4zSplW.png" alt="image-20231213164318211"></p>
+<p>这里以缓存项为例说明为什么需要默认值。SpringBoot的某些功能组件可能会提供缓存，这在生产环境中肯定是可以提升性能的，但在开发阶段可能因为没有及时生效而排查困难，所以SpringBoot开发者共计默认是禁用所有缓存项的。</p>
+<p>如果不想让应用这些开发则工具带来的默认值，则可以通过指定参数来禁用默认值</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">devtools:</span></span><br><span class="line">    <span class="attr">add-properties:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="自动重启"><a href="#自动重启" class="headerlink" title="自动重启"></a>自动重启</h4><h5 id="1-概述"><a href="#1-概述" class="headerlink" title="1.	概述"></a>1.	概述</h5><p>SpringBoot开发者工具会监控类路径下的文件，一旦有文件发送变更，应用就能自动快速重启，则不需要手动重启应用。自动重启技术使用了两个类加载器：</p>
+<ul>
+<li>基础类加载器：用于加载不会变更的文件。比如第三方的jar包</li>
+<li>重启类加载器：用于加载应用类文件</li>
+</ul>
+<p>这样做的好处就是每次重启只需要创建一个重启类加载器即可，基础类加载器已加载好的不用动，虽然不能和JRebel热部署方式相比，但和冷启动相比，自动重启技术拥有更高的启动效率。</p>
+<p><strong>注</strong>：使用AspectJ切面编程不支持自动重启</p>
+<h5 id="2-触发机制"><a href="#2-触发机制" class="headerlink" title="2.	触发机制"></a>2.	触发机制</h5><p>自动重启触发机制如下：</p>
+<ul>
+<li>IntelliJ IDEA：需要重新构建（Build）项目才能自动重启</li>
+<li>构建工具：在IDE构建插件中使用mvn compile&#x2F;gradle build命令也可以触发重启</li>
+</ul>
+<p>IntelliJ IDEA默认是手动构建应用的，当然也可以开启自动构建应用：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/qUjmMBYbu3HP5fk.png" alt="image-20231213165340347"></p>
+<h5 id="3-排除资源"><a href="#3-排除资源" class="headerlink" title="3.	排除资源"></a>3.	排除资源</h5><p>某些资源是没必要触发应用自动重启的，默认情况下，以下目录下的资源不会触发自动重启：</p>
+<ul>
+<li>&#x2F;META-INF&#x2F;maven</li>
+<li>&#x2F;META-INF&#x2F;resource</li>
+<li>&#x2F;resource</li>
+<li>&#x2F;static</li>
+<li>&#x2F;public</li>
+<li>&#x2F;template</li>
+</ul>
+<p>虽然以上目录下的文件变更不会触发应用自动重启，但是会触发应用实时重载，也可以达到快速刷新的效果</p>
+<p>如果不想使用以上默认值，则可以通过</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">devtools:</span></span><br><span class="line">    <span class="attr">restart:</span></span><br><span class="line">      <span class="attr">exclude:</span> <span class="string">static/**</span></span><br></pre></td></tr></table></figure>
+
+<p>这里只排除static目录下的所有文件，它的变更不会触发应用自动重启。如果要保留所有的默认目录，再添加其他的额外目录，则使用spring.devtools.resart.additional-exclude参数即可</p>
+<h5 id="4-禁用日志报告"><a href="#4-禁用日志报告" class="headerlink" title="4.	禁用日志报告"></a>4.	禁用日志报告</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">devtools:</span></span><br><span class="line">    <span class="attr">restart:</span></span><br><span class="line">      <span class="attr">log-condition-evaluation-delta:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="5-禁用自动重启"><a href="#5-禁用自动重启" class="headerlink" title="5.	禁用自动重启"></a>5.	禁用自动重启</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">devtools:</span></span><br><span class="line">    <span class="attr">restart:</span></span><br><span class="line">      <span class="attr">enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="实时重载"><a href="#实时重载" class="headerlink" title="实时重载"></a>实时重载</h4><p>SpringBoot开发者工具支持应用文件变更后网页实时重载内容，即不需要手动刷新页面，当类路径下的资源发生变更时可以出发浏览器自动刷新，自动刷新的前提是浏览器安装LiveReload扩展插件即可。</p>
+<p>前面讲过那几个目录只要一更改就会触发重载。</p>
+<p>关闭实时重载配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">devtools:</span></span><br><span class="line">    <span class="attr">liverload:</span></span><br><span class="line">      <span class="attr">enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h4><p>在实际开发中，同时开发的项目可能非常多，现在都是微服务多模块开发，一个服务就是一个模块，即一个项目，如果逐个地配置是在太麻烦，可以全局配置。</p>
+<p>全局配置文件位于<code>$HOME/.config/spring-boot</code>目录下，配置文件名为spring-boot-devtools,支持.properties、.yaml两种配置文件类型</p>
+<p><code>$HOME</code>默认指的是用户的主目录，如果需要自定义这个目录，则可以通过一下两种方式设置：</p>
+<ul>
+<li>设置SPRING_DEVTOOLS_HOME环境变了</li>
+<li>设置spring.devtools.home系统参数</li>
+</ul>
+<p>比如这样一个全局配置文件spring-boot-devtools.yaml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">devtools:</span></span><br><span class="line">    <span class="attr">restart:</span></span><br><span class="line">      <span class="attr">log-condition-evaluation-delta:</span> <span class="literal">false</span></span><br><span class="line">      <span class="attr">trigger-file:</span> <span class="string">&quot;.reloadtrigger&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>禁用了自动重启日志报告以及指定了一个触发文件</p>
+<p>建议使用全局配置文件，这样就不用在每个项目中单独配置开发者工具了。</p>
+<p>需要注意的是：</p>
+<p>（1）spring-boot-devtools配置文件不支持任何基于Profile的配置</p>
+<p>（2）如果项目同时设计SpringBoot新老版本开发，则可以使用<code>$HOME/.spring-boot-devtools.properties</code>配置文件，新老版本都可以兼容这种文件</p>
+<p>比如：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.devtools.restart.log-condition-evaluation-delta</span>=<span class="string">true</span></span><br><span class="line"><span class="attr">spring.devtools.restart.trigger-file</span>=<span class="string">.reloadtrigger</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：.properties配置不能带双引号</p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>SpringBoot提供了丰富的测试功能，主要由以下两个模块组成：</p>
+<ul>
+<li>spring-boot-test：提供测试核心功能</li>
+<li>spring-boot-test-autoconfigure：提供对测试的自动配置</li>
+</ul>
+<p>SpringBoot提供了一个spring-boot-starter-test一站式启动器：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>测试启动器依赖不仅包含以上两个SpringBoot模块，还包含Spring Test测试模块，以及其他第三方测试类库：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/q9D4hXBJrw5ROGk.png" alt="image-20231213112105317"></p>
+<ul>
+<li>Junit5：Java最流行的单元测试框架</li>
+<li>AssertJ：一款快速断言库</li>
+<li>Hamcrest：一款单元测试匹配库</li>
+<li>Mockito：一款Mock测试框架</li>
+<li>JSONassert：一款json断言库</li>
+<li>JsonPath：一款JSON XPath库</li>
+</ul>
+<p>以上这些都是SpringBoot提供的常用的测试类库，如果上面的测试类库还不能满足你的需要，也可以任意添加以上没有的类库。</p>
+<p>现在基本上使用的是JUnit5，如果应用还在使用JUnit4写的单元测试用例，那么也可以使用JUnit5的Vintage引擎来运行，如下面的配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.junit.vintage<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit-vintage-engine<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hamcrest<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hamcrest-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>需要排除hamcrest-core依赖，因为依赖坐标已经改了，并且默认内置在SpringBoot依赖管理中，如上面的依赖关系树所示，最新的Hamcrest依赖已经是org.hsmcrest:hamcrest坐标了</p>
+<p>SpringBoot提供了一个@SpringBootTest注解，用在单元测试雷伤以启用支持SpringBoot特性的单元测试，如果使用的是JUnit4，那么测试类上还需要额外添加@RunWith(SpringRunner.class)注解，然后在测试类方法上加上@Test注解即可，每一个@Test注解修饰的方法就是一个单元测试方法。</p>
+<p>@SpringBootTest注解有一个最重要的webEnvironment环境参数，支持以下几种环境设置：</p>
+<ul>
+<li>MOCK（默认）：加载一个Web ApplicationContext并提供了一个Mock Web Environment，但不会自动内嵌Web容器，并可以结合@AutoConfigureMockMvcor和@AutoConfigureWebTestClient注解一起使用进行Mock测试</li>
+<li>RANDOM_PORT：加载一个WebServerApplicationContext，以及提供一个真实的WebEnvironment，并以随机端口启动内嵌服务器。</li>
+<li>DEFINED_PORT：和RANDOM_PORT一样，不同的是DEFINED_PORT是一应用指定的端口运行的，默认是8080</li>
+<li>NONE：加载一个ApplicationContext，但不会提供任何Web Environment。</li>
+</ul>
+<p>如果使用的@SpringBootTest注解不带任何参数，则默认为Mock环境</p>
+<h3 id="真实环境测试"><a href="#真实环境测试" class="headerlink" title="真实环境测试"></a>真实环境测试</h3><p>在@SpringBootTest注解中指定基于随机端口的真实Web环境，然后在类成员变量或者方法参数上注入TestRestTemplate实例，就可以完成对Spring MVC接口的真实环境测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MvcTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getUserTest</span><span class="params">(<span class="meta">@Autowired</span> TestRestTemplate testRestTemplate)</span>&#123;</span><br><span class="line">        Map&lt;String,String&gt; multiValueMap= <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        multiValueMap.put(<span class="string">&quot;username&quot;</span>,<span class="string">&quot;七岁就很浪&quot;</span>);</span><br><span class="line">        Result result=testRestTemplate.getForObject(<span class="string">&quot;/user/get?username=&#123;username&#125;&quot;</span>,Result.class,multiValueMap);</span><br><span class="line">        assertThat(result.getCode()).isEqualTo(<span class="number">0</span>);</span><br><span class="line">        assertThat(result.getMsg()).isEqualTo(<span class="string">&quot;ok&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试当前应用下的&#x2F;user&#x2F;get接口，传入对应的用户名参数，最后检查接口返回结果是否和预期一致，测试结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/bvfzAhgTBkLZ5oS.png" alt="image-20231213143514219"></p>
+<p>单元测试通过，从执行日志可以看到，它启动了一个嵌入式的Tomcat容器来测试真实的Web环境。</p>
+<h3 id="Mock环境测试"><a href="#Mock环境测试" class="headerlink" title="Mock环境测试"></a>Mock环境测试</h3><p>通过在类上面使用@AutoConfigureMockMvc注解，然后在类成员变量或者方法参数上注入MockMvc实例，就可以完成对SpringMvc接口的Mock测试。</p>
+<p>基于默认的Mock环境的测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@AutoConfigureMockMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MockMvcTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getUserTest</span><span class="params">(<span class="meta">@Autowired</span> MockMvc mvc)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(<span class="string">&quot;/user/get?username=&#123;username&#125;&quot;</span>,<span class="string">&quot;test&quot;</span>))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().string(<span class="string">&quot;&#123;\&quot;code\&quot;:0,\&quot;msg\&quot;:\&quot;ok\&quot;,\&quot;data\&quot;:\&quot;test\&quot;&#125;&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试一下当前应用下的&#x2F;user&#x2F;get接口，传入对应的参数名，最后检查请求状态是否OK(200)，响应的内容是否和预期一致，测试结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/RZoOk3BEyGtJjuU.png" alt="image-20231213145419203"></p>
+<p>单元测试通过，从执行日志中可以看到，它并未启动真实的Web环境来测试，而是使用Mock环境测试的。</p>
+<h3 id="Mock组件测试"><a href="#Mock组件测试" class="headerlink" title="Mock组件测试"></a>Mock组件测试</h3><p>某些时候可能还需要模拟一些组件，比如某些服务只有上线之后才能调用，在开发阶段不可用，这是就需要Mock模拟测试了，提供各种模拟组件以完成测试。</p>
+<p>SpringBoot提供了一个@MockBean注解，可为Spring中的Bean组件定义基于Mockito的Mock测试，他可以创建一个新Bean以覆盖Spring环境中已有的Bean，它可以用在测试类、成员变量上，或者@Configuration配置类、成员变量上，被模拟的Bean每次测试结束后自动重置。</p>
+<p>假设现在有一个远程服务的userService，本地不能调用，现在进行Mock测试，如以下使用示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MockBeanTest</span> &#123;</span><br><span class="line">    </span><br><span class="line"><span class="comment">//    @Autowired</span></span><br><span class="line"><span class="comment">//    private  UserService userService;</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@MockBean</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">countAllUser</span><span class="params">()</span>&#123;</span><br><span class="line">        BDDMockito.given(<span class="built_in">this</span>.userService.countAllUsers()).willReturn(<span class="number">88</span>);</span><br><span class="line">        assertThat(<span class="built_in">this</span>.userService.countAllUsers()).isEqualTo(<span class="number">88</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的@MockBean注解使用在UserService变量上，表明这个userService实例在当前测试用例中是被Mock覆盖的，如果要模拟的Bean有多个，则可以使用@Qualifier注解指定，然后通过Mockito提供的代理工具类方法创建模拟返回数据，运行该服务的测试方法，当模拟数据和预期结果一致时才会通过测试。</p>
+<p>这里通过BDDMockito工具类模拟userService#countAllUsers方法让他返回统计的用户总数(88)，最后检查该方法的返回值是否和预期值一致，测试结果如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/rfRL7cE2JeuYwM6.png" alt="image-20231213151210744"></p>
+<p>单元测试通过，也可以使用@SpyBean注解代替@MockBean注解，两者区别：</p>
+<ul>
+<li>@SpyBean—如果没有提供Mockito代理方法，则会调用真实的Bean来获取数据。</li>
+<li>@MockBean—不管有没有提供Mockito代理方法，都会调用Mock的Bean来获取数据。</li>
+</ul>
+<p>@MockBean、@SpyBean注解既可以作用于Mock环境，也可以作用于真实环境，它只是用来模拟、替换环境总指定的Bean而已，但不能用于模拟在应用上下文刷新期间Bean的行为，因为在执行测试用例时应用上下文已经刷新完成了，所以不可能再去模拟了，这种情况建议使用@Bean方法来创建模拟配置。</p>
+<h3 id="技术框架测试"><a href="#技术框架测试" class="headerlink" title="技术框架测试"></a>技术框架测试</h3><p>除了支持SpringBoot环境的单元测试，SpringBoot还提供了各种技术组件的单元测试配置，比如JSON、SpringMVC、WebFlux、SpringDataJPA、SpringDataJDBC、SpringDataRedis等。</p>
+<p>比如想测试JSON反序列化&#x2F;序列化功能，其自动配置类为JsonTestersAutoConfiguration，它提供了对各个JSON框架的支持，只修要在单元测试类上添加一个@JsonTest注解，注入对应的JacksonTester、GsonTester、JsonbTester实例就可以直接测试。</p>
+<p>首先在资源目录下创建一个xxx.json文件，JSON文件内容如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span><span class="number">10001</span><span class="punctuation">,</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;xiaodong&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;birthday&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2002-08-24 21:00:00&quot;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>以下就是使用Jackson序列化&#x2F;反序列化的测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@org</span>.springframework.boot.test.autoconfigure.json.JsonTest</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsonTest</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> JacksonTester&lt;User&gt; json;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">serialize</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="number">10001L</span>, <span class="string">&quot;xiaodong&quot;</span>, LocalDateTime.of(<span class="number">2002</span>, <span class="number">8</span>, <span class="number">24</span>, <span class="number">21</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.json.write(user));</span><br><span class="line">        assertThat(<span class="built_in">this</span>.json.write(user)).isEqualToJson(<span class="string">&quot;/ldd.json&quot;</span>);</span><br><span class="line">        assertThat(<span class="built_in">this</span>.json.write(user)).hasJsonPathStringValue(<span class="string">&quot;@.name&quot;</span>);</span><br><span class="line">        assertThat(<span class="built_in">this</span>.json.write(user))</span><br><span class="line">                .extractingJsonPathStringValue(<span class="string">&quot;@.name&quot;</span>).isEqualTo(<span class="string">&quot;xiaodong&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">deserialize</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">content</span> <span class="operator">=</span> <span class="string">&quot;&#123;\&quot;id\&quot;:10002, \&quot;name\&quot;:\&quot;xiaojia\&quot;, \&quot;birthday\&quot;: \&quot;2003-05-30T02:32:00\&quot;&#125;&quot;</span>;</span><br><span class="line">        assertThat(<span class="built_in">this</span>.json.parse(content))</span><br><span class="line">                .isEqualTo(<span class="keyword">new</span> <span class="title class_">User</span>(<span class="number">10002L</span>, <span class="string">&quot;xiaojia&quot;</span>,</span><br><span class="line">                        LocalDateTime.of(<span class="number">2003</span>, <span class="number">5</span>, <span class="number">30</span>, <span class="number">2</span>, <span class="number">32</span>, <span class="number">0</span>)));</span><br><span class="line">        assertThat(<span class="built_in">this</span>.json.parseObject(content).getName()).isEqualTo(<span class="string">&quot;xiaojia&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里提供了两个测试方法：</p>
+<ul>
+<li>serialize：测试JSON序列化功能，判断序列化后的内容和资源目录下的ldd.json文件的内容是否一致，是否有name这个字段，并且这个字段是否是xiaodong。</li>
+<li>deserialize：测试反序列化功能，判断反序列化后的用户对象和新创建的用户对象是否一致，并且反序列化后的用户对象name值是否为xiaojia。</li>
+</ul>
+<p>测试结果：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/IlfuLHPdpZa5UtJ.png" alt="image-20231213154035975"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/LBEW5gtfn4Isw9k.png" alt="image-20231213154110492"></p>
+<p>更多技术框架的自动配置可以参考spring-boot-test-autoconfigure测试自动配置包中的自动配置文件：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/6mVnJkIrWbHKe5v.png" alt="image-20231213154405460"></p>
+<p>比如上面的JSON序列化和反序列化功能，它注册了SpringBoot所支持的几种JSON工具类的自动配置如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/13/EFmJ2UzyCOjoNua.png" alt="image-20231213154602579"></p>
+<p>这里可以看到JSON测试支持的自动配置类JsonTestersAutoConfiguration，以及JSON框架Jackson、Gson、Jsonb的自动配置类都在此处进行了注册。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">小东</div><div class="post-copyright__author_desc">道阻且长 行则将至</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://humbledong.github.io/undefined/e2fd590a.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://humbledong.github.io/undefined/e2fd590a.html')">SpringBoot调试与单元测试</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/2TQtWAnv8Of1ykp.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://humbledong.github.io/undefined/e2fd590a.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=SpringBoot调试与单元测试&amp;url=https://humbledong.github.io/undefined/e2fd590a.html&amp;pic=https://s2.loli.net/2024/01/08/yBoXGRVkvzJEHin.webp" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://humbledong.github.io" target="_blank">七岁就很浪</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/SpringBoot3/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SpringBoot3<span class="tagsPageCount">10</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/01/08/DBhgJApORaw1FXi.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/undefined/d6c1f1a5.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/EJbQ2HtR4WNZqo5.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SpringBoot任务</div></div></a></div><div class="next-post pull-right"><a href="/undefined/5d2d95e5.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/M3rRJKpo4wB1HOj.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringBoot打包与部署</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/undefined/91f6cd83.html" title="SpringBootStarter和自动配置"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/h2Rw57fbxdO469a.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-15</div><div class="title">SpringBootStarter和自动配置</div></div></a></div><div><a href="/undefined/46f3ef61.html" title="SpringBootWeb核心应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/cVJFZz9IYWhXBPs.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-20</div><div class="title">SpringBootWeb核心应用</div></div></a></div><div><a href="/undefined/d6c1f1a5.html" title="SpringBoot任务"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/EJbQ2HtR4WNZqo5.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-22</div><div class="title">SpringBoot任务</div></div></a></div><div><a href="/undefined/5d2d95e5.html" title="SpringBoot打包与部署"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/M3rRJKpo4wB1HOj.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-25</div><div class="title">SpringBoot打包与部署</div></div></a></div><div><a href="/undefined/c4b502db.html" title="SpringBoot启动过程与拓展应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/oQKk97qz8sSX6rH.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-17</div><div class="title">SpringBoot启动过程与拓展应用</div></div></a></div><div><a href="/undefined/7d4079d0.html" title="SpringBoot日志管理"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/CbtcXurP9a7qNdf.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-10-18</div><div class="title">SpringBoot日志管理</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/zhheo/Sticker-Heo@latest/Sticker-100/出家人.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">这有关于<b style="color:#fff">Java</b>相关的问题和看法，还有<b style="color:#fff">喜欢的东西的看法和</b>和<b style="color:#fff">分享</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">小东</h1><div class="author-info__desc">道阻且长 行则将至</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/humbleDong" target="_blank" title="Github"></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/608736096" target="_blank" title="BiliBili"></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBoot%E8%B0%83%E8%AF%95%E4%B8%8E%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">1.</span> <span class="toc-text">SpringBoot调试与单元测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95"><span class="toc-number">1.1.</span> <span class="toc-text">断点调试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8main%E6%96%B9%E6%B3%95%E5%90%AF%E5%8A%A8%E8%B0%83%E8%AF%95"><span class="toc-number">1.1.1.</span> <span class="toc-text">使用main方法启动调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Maven%E6%8F%92%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-number">1.1.2.</span> <span class="toc-text">使用Maven插件启动测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%90%AF%E7%94%A8%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.	启用调试模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">2.	远程调试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.3.</span> <span class="toc-text">开发者工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">默认值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">自动重启</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.3.3.1.</span> <span class="toc-text">1.	概述</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.3.3.2.</span> <span class="toc-text">2.	触发机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%8E%92%E9%99%A4%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.3.3.3.</span> <span class="toc-text">3.	排除资源</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%A6%81%E7%94%A8%E6%97%A5%E5%BF%97%E6%8A%A5%E5%91%8A"><span class="toc-number">1.1.3.3.4.</span> <span class="toc-text">4.	禁用日志报告</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E7%A6%81%E7%94%A8%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF"><span class="toc-number">1.1.3.3.5.</span> <span class="toc-text">5.	禁用自动重启</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E9%87%8D%E8%BD%BD"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">实时重载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.3.5.</span> <span class="toc-text">全局配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.</span> <span class="toc-text">单元测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E5%AE%9E%E7%8E%AF%E5%A2%83%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.2.</span> <span class="toc-text">真实环境测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mock%E7%8E%AF%E5%A2%83%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.3.</span> <span class="toc-text">Mock环境测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mock%E7%BB%84%E4%BB%B6%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.4.</span> <span class="toc-text">Mock组件测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A1%86%E6%9E%B6%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.5.</span> <span class="toc-text">技术框架测试</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/undefined/32643233.html" title="SpringBoot监控与报警"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/DBhgJApORaw1FXi.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringBoot监控与报警"/></a><div class="content"><a class="title" href="/undefined/32643233.html" title="SpringBoot监控与报警">SpringBoot监控与报警</a><time datetime="2023-10-28T06:14:20.000Z" title="发表于 2023-10-28 14:14:20">2023-10-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/5d2d95e5.html" title="SpringBoot打包与部署"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/M3rRJKpo4wB1HOj.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringBoot打包与部署"/></a><div class="content"><a class="title" href="/undefined/5d2d95e5.html" title="SpringBoot打包与部署">SpringBoot打包与部署</a><time datetime="2023-10-25T06:14:20.000Z" title="发表于 2023-10-25 14:14:20">2023-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/e2fd590a.html" title="SpringBoot调试与单元测试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/yBoXGRVkvzJEHin.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringBoot调试与单元测试"/></a><div class="content"><a class="title" href="/undefined/e2fd590a.html" title="SpringBoot调试与单元测试">SpringBoot调试与单元测试</a><time datetime="2023-10-24T06:14:20.000Z" title="发表于 2023-10-24 14:14:20">2023-10-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/d6c1f1a5.html" title="SpringBoot任务"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/EJbQ2HtR4WNZqo5.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringBoot任务"/></a><div class="content"><a class="title" href="/undefined/d6c1f1a5.html" title="SpringBoot任务">SpringBoot任务</a><time datetime="2023-10-22T06:14:20.000Z" title="发表于 2023-10-22 14:14:20">2023-10-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/16cf83b7.html" title="SpringBoot数据访问"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/lVt6fop81yIKim3.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringBoot数据访问"/></a><div class="content"><a class="title" href="/undefined/16cf83b7.html" title="SpringBoot数据访问">SpringBoot数据访问</a><time datetime="2023-10-21T06:14:20.000Z" title="发表于 2023-10-21 14:14:20">2023-10-21</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/fish.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2024 By <a class="footer-bar-link" href="/" title="小东" target="_blank">小东</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">47</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">9</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">我的</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.cnblogs.com/qisui/" title="博客园"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/blog.ico" alt="博客园"/><span class="back-menu-item-text">博客园</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">常用</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.processon.com/" title="processon画图"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/processon.ico" alt="processon画图"/><span class="back-menu-item-text">processon画图</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOF/" style="font-size: 0.88rem;">AOF<sup>1</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Ajax/" style="font-size: 0.88rem;">Ajax<sup>1</sup></a><a href="/tags/Druid/" style="font-size: 0.88rem;">Druid<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>2</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSON/" style="font-size: 0.88rem;">JSON<sup>1</sup></a><a href="/tags/JSP/" style="font-size: 0.88rem;">JSP<sup>1</sup></a><a href="/tags/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 0.88rem;">Java多线程<sup>1</sup></a><a href="/tags/Java%E8%BF%9B%E9%98%B6/" style="font-size: 0.88rem;">Java进阶<sup>2</sup></a><a href="/tags/Linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" style="font-size: 0.88rem;">Linux基本命令<sup>1</sup></a><a href="/tags/Linux%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">Linux基础<sup>1</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>1</sup></a><a href="/tags/MyBatis-plus/" style="font-size: 0.88rem;">MyBatis-plus<sup>2</sup></a><a href="/tags/MySQL%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">MySQL基础<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 0.88rem;">Mybatis<sup>1</sup></a><a href="/tags/RDB/" style="font-size: 0.88rem;">RDB<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>2</sup></a><a href="/tags/Servlet/" style="font-size: 0.88rem;">Servlet<sup>1</sup></a><a href="/tags/Shiro/" style="font-size: 0.88rem;">Shiro<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a><a href="/tags/SpringBoot-CRUD/" style="font-size: 0.88rem;">SpringBoot-CRUD<sup>1</sup></a><a href="/tags/SpringBoot3/" style="font-size: 0.88rem;">SpringBoot3<sup>10</sup></a><a href="/tags/SpringBoot%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">SpringBoot原理<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 0.88rem;">SpringMVC<sup>1</sup></a><a href="/tags/SpringSecurity/" style="font-size: 0.88rem;">SpringSecurity<sup>1</sup></a><a href="/tags/Spring%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">Spring事务<sup>1</sup></a><a href="/tags/Swagger/" style="font-size: 0.88rem;">Swagger<sup>1</sup></a><a href="/tags/Thymeleaf/" style="font-size: 0.88rem;">Thymeleaf<sup>1</sup></a><a href="/tags/Tomcat/" style="font-size: 0.88rem;">Tomcat<sup>1</sup></a><a href="/tags/Yaml/" style="font-size: 0.88rem;">Yaml<sup>1</sup></a><a href="/tags/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 0.88rem;">cron表达式<sup>1</sup></a><a href="/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 0.88rem;">代码生成器<sup>1</sup></a><a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" style="font-size: 0.88rem;">国际化<sup>1</sup></a><a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">安全<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6task/" style="font-size: 0.88rem;">定时task<sup>1</sup></a><a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 0.88rem;">年度总结<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5task/" style="font-size: 0.88rem;">异步task<sup>1</sup></a><a href="/tags/%E6%8B%A6%E6%88%AA%E5%99%A8/" style="font-size: 0.88rem;">拦截器<sup>2</sup></a><a href="/tags/%E9%82%AE%E4%BB%B6task/" style="font-size: 0.88rem;">邮件task<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/6/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 小东 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("04/6/2022 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "/img/down.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
