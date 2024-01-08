@@ -1,0 +1,831 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Redis进阶 | 七岁就很浪</title><meta name="keywords" content="Redis,RDB,AOF"><meta name="author" content="小东"><meta name="copyright" content="小东"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Redis进阶"><meta name="application-name" content="Redis进阶"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Redis进阶"><meta property="og:url" content="https://humbledong.github.io/undefined/505826b8.html"><meta property="og:site_name" content="七岁就很浪"><meta property="og:description" content="Reids进阶Redis.conf 配置启动的时候，通过这个配置启动  单位  123456789101112131415161718# Redis configuration file example.## Note that in order to read the configuration"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://s2.loli.net/2024/01/08/zNxebMYtJmv86PX.png"><meta property="article:author" content="小东"><meta property="article:tag" content="七岁就很浪博客"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s2.loli.net/2024/01/08/zNxebMYtJmv86PX.png"><meta name="description" content="Reids进阶Redis.conf 配置启动的时候，通过这个配置启动  单位  123456789101112131415161718# Redis configuration file example.## Note that in order to read the configuration"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://humbledong.github.io/undefined/505826b8"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🧑‍💻 IT行业从业者","🔍 分享与热心帮助","🐟️ 授人以渔不以鱼","🎹 捕捉人间好音乐"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: 小东","link":"链接: ","source":"来源: 七岁就很浪","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '七岁就很浪',
+  title: 'Redis进阶',
+  postAI: '',
+  pageFillDescription: 'Reids进阶, Redis.conf 配置, Redis持久化, RDB（Redis DataBase）, AOF（Append  Only  File）, Redis订阅发布, Redis主从复制, 概念, 环境配置, 主从复制原理, 宕机后手动配置主机, 哨兵模式, Redis缓存穿透和雪崩, 缓存穿透：, 缓存击穿：, 缓存雪崩：进阶配置启动的时候通过这个配置启动单位配置文件单位对大小写不敏感包含就是好比我们之前的之类的包含网络绑定的默认是本机保护模式是否开启默认是端口设置通用以守护线程的方式进行默认是我们需要自己开启为如果以后台的方式运行我们就需要指定一个文件日志日志的文件位置名数据库数量默认是个数据库是否总是显示快照持久化在规定的时间内执行了多少次操作则会持久化到文件持久化如果出错的话是否还要继续工作是否压缩文件需要消耗一些资源保存文件的时候运行错误的检查校验文件保存的目录复制后面主从复制的时候了解安全默认是没有密码的设置密码获取密码限制客户端设置能连接上的最大客户端的数量配置最大的内存容量内存达到上限之后的处理策略只对设置了过期时间的进行默认值删除算法的随机删除即将过期的随机删除删除即将过期的永不过期返回错误模式配置默认是不开启模式的默认是以方式持久化的在大部分情况下完全够用持久化的文件的名字每次修改都会消耗性能每秒执行一次可能会丢失这一秒的数据不执行这个时候操作系统自己同步数据速度最快持久化是内存数据库如果不将内存中的数据库保存到磁盘那么一旦服务器进程退出服务器中的数据库状态也会消失所以提供了持久化功能什么是原理在指定的时间间隔内将内存中的数据集快照写入磁盘也就是快照它恢复时是将快照文件直接读到内存里会单独创建一个子进程来进行持久化会先将数据写入到一个临时文件中待持久化过程都结束了再用这个临时文件替换上次持久化好的文件整个过程中主进程是不进行任何操作的这就确保了极高的性能如果需要进行大规模数据的恢复且对于数据恢复的完整性不是非常敏感那方式要比方式更加的高效的缺点事最后一次持久化后的数据可能丢失我们默认的就是一般情况下不需要修改这个配置有时候在生产环境会将这个文件进行备份保存的文件是触发机制的规则满足的情况下会自动触发规则执行命令也会触发我们的规则退出也会生成文件备份就会自动生产一个文件恢复文件只需要将文件放在我们启动目录即可启动的时候会自动检查文件恢复其中的数据查看需要存在的位置如果在这个目录下存在文件启动就会自动恢复其中的数据虽然它自己配置就已经够了但是还是需要学习了解优点适合大规模的数据恢复如果服务器宕机了就可以恢复数据对数据的完整性要求不高缺点需要一定的时间间隔进程操作如果意外宕机了这个最后一次修改数据就没有了进程的时候会占用一定的内存空间将我们的所有命令都记录下来恢复的时候就把这个文件全部再执行一遍默认是文件无限追加文件会越来越大什么是原理以日志的形式来记录每个写操作将执行过的所有指令记录下来读操作不记录只许追加文件但不可以改写文件启动之初会读取该文件重新构建数据换言之重启的话就根据日志文件的内容将写指令从前到后执行一次完成数据恢复的工作保存的是文件默认是不开启的需要我们改为必须重启服务测试一下文件放在这个目录里面的查看一下文件工具如果我们此时修改了这个文件的内容再重启服务就会失败可以用到我们的修复工具修改重启我们的服务直接失败我们使用修复工具我们发现最后一次的数据没了去查看我们的文件这里记得去把配置该回去用默认的就够了优点和缺点默认是不开启模式的默认是以方式持久化的在大部分情况下完全够用持久化的文件的名字每次修改都会消耗性能每秒执行一次可能会丢失这一秒的数据不执行这个时候操作系统自己同步数据速度最快优点每一次修改都同步文件的完整性会更好每秒同步一次可能会丢失一秒的数据从不同步效率是最高的缺点相对于数据文件来说远大于修复的速度也比慢也有自己的修复工具运行效率也要比慢所以我们默认的配置就是持久化因为默认是文件无限追加文件会越来越大如果文件大于一个新进程将我们的文件进行重写扩展持久化方式能够在指定时间间隔内对你的数据进行快照存储持久化方式记录每次对服务器写的操作当服务器重启的时候会重新执行这些命令来恢复原始的数据命令以协议追加保存每次写的从左到文件末尾还能对文件进行后台重写使得文件的体积不至于过大只做缓存如果你只希望你的数据在服务器运行的时候存在你也可以不做任何持久化同时开启两种持久化方式在这种情况下当重启的时候会优先载入文件来恢复原始的数据因为在通常情况下文件保存的数据要比文件保存的文件的数据更完整的数据不实时同时使用两者时服务器重启也只会找文件那要不要只用呢当然是不建议的因为更适合用于备份数据库在不断变化不好备份快速重启而且不会有可能潜在的留着作为一个以防万一的手段性能建议因为文件只用后备用途建议只在上持久化文件而且只要分钟备份一次就够了只保留这条规则如果好处是在最恶劣情况下也只会丢失不超过两秒的数据启动脚本较简单值自己的文件即可代价一是带来了持续的而是的最后将过程中产生的新数据写到新文件造成的阻塞几乎是不可能避免的只要硬盘许可应该尽量减少的频率重写的基础大小默认值太小了可以设置到以上默认超过原大小的大小重写可以改到适当的数值如果不仅靠实现高可用性也可以能省掉一大笔也减少了时带来的系统波动代价是如果同时倒掉会丢失十几分钟的数据启动脚本也要比较两个中的文件载入较新的那个订阅发布发布订阅是一种消息通信模式发送者发送消息订阅者接收消息客户端可以订阅任意数量的频道订阅发布消息图命令这些命令被广泛用于构建即时通信应用比如网络聊天室和实时广播实时提醒等序号命令描述订阅一个或者多个符合给定模式的频道查看订阅与发布系统状态将信息发送到指定的频道退订所有给定模式的频道订阅给定的一个或多个频道的信息退订给定的频道测试订阅端订阅一个频道等待读取推送的信息消息哪个频道的消息消息的具体内容发送端发布者发布消息到频道原理是使用实现的通过分析源码里面的文件了解发布和订阅机制的底层实现用来可以加深对的理解通过和等命令实现发布和订阅功能通过命令订阅某个频道后里维护了一个字典字典的键就是一个个频道而字典的值则是一个链表链表中保存了所有订阅这个的客户端命令的关键就是将客户端添加到给定的订阅链表中通过命令向订阅者发送消息会使用给定频道作为键在它所维护的子带你中记录了订阅这个频道的所有客户端的链表遍历这个链表将消息发布给所有订阅者从字面上理解就是发布与订阅在中可以设定对某一个值进行消息发布及消息订阅当一个值上进行了消息发布后所有订阅它的客户端都会收到相应的消息这一功能最明显的用法就是用作实时消息系统比如普通的即时聊天群聊等等主从复制概念主从复制是指将一台服务器的数据复制到其他的服务器前者称之为主节点后者称之为从节点数据的复制是单向的只能由主节点到从节点以写为主以读为主默认情况下每台服务器都是主节点且一个主节点可以有多个从节点或没有从节点但一个从节点只能由一个主节点主从复制的作用主要包括数据冗余主从复制实现了数据的热备份是持久化之外的一种数据冗余方式故障恢复当主节点出现问题时可以从主节点提供服务实现快速的故障恢复实际上是一种服务的冗余负载均衡在主从复制的基础上配合读写分离可以由主节点提供写服务由从节点提供读服务即写数据时应用连接主节点读数据时应用连接从节点分担服务器负载尤其是在写少读多的场景下通过多个从节点分担读负载可以大大提高服务器的并发量高可用集群基石除了以上作用之外主从复制还是哨兵模式和集群能实施的基础因此说主从复制时高可用的基础一般来说要将运用于工程项目中只使用一台是万万宕机不能的原因如下从结构上单个服务器会发生单点故障并且一台服务器需要处理所有的请求负载压力较大从容量上单个服务器内存容量有限就算一台服务器内存容量为也不能将所有内存用作存储内存一般来说单台最大使用内存不应该超过电商网站上的商品一般都是一次上传无数次浏览的说专业点也就是多读少写对于这种场景我们一般是这种架构环境配置只配置从库不配置主库首先需要查看当前库的信息查看当前库的信息角色没有从机开启四个会话个主机两个从机一个测试现在去配置文件里面将我们的配置文件复制三份出来修改内容如下修改端口修改为守护进程即后台启动修改文件名修改日志导出位置修改文件名然后分别启动三个服务通过测试的进程查看信息主从复制原理默认情况下每台服务器都是主节点这种时候如何实现的我们的主从复制呢我们一般情况下只需要配置从机即可主从从给从机配置主机主机有信息注真实的主从配置应该在配置文件中配置这样的话是永久的我们这里使用的命令是暂时的配置文件配置地点测试主机可以写操作从机只能读操作主机中写的所有数据都会被从机自动保存主机写从机可以读但是写不了细节这个时候如果主机断开连接从机依旧可以连接到主机但是没有写操作这个时候主机如果回来从机依旧可以获取主机信息细节如果是使用命令行配置的主从如果从机重启就会自动变为主机但是这时候如果让他又变为从机例如让断开然后再连接再设置为从机从机也会立马从主机中获取值复制原理启动成功连接到一个后会发送一个同步命令接受到命令启动后台的存盘进程同时收集所有接收到的用于修改数据集命令在后台进程执行完毕后将传送整个数据文件到并完成一次完全同步全量复制服务在接受到数据库文件数据后将其存盘并加载到内存中增量复制继续将所收集到的修改命令一次传给完成同步但是只要是重新连接一次全量复制会被自动执行我们的数据可以在从机中看到宕机后手动配置主机即做主机又做从机此时依旧为实现一下查看节点信息依旧为从机这时候如果主机宕机了我们手动把停了对从机执行一段命令从机操作主机宕机查看从机状态这时候从机就变主机了哨兵模式上面我们是手动配置主机但是我们希望主机宕机后从机自动变主机这时候就需要我们的哨兵模式了主从切换的方法是当主服务器宕机后需要手动把一台服务器切换为主服务器需要人工干预费时费力还会造成一段时间内服务器不可用更多的时候我们考虑的是哨兵模式从开始正式提供了架构来解决这个问题谋朝篡位的自动版能够后台监控主机是否故障如果故障根据投票数自动将从库转换为主库哨兵模式是一种特殊的模式首先提供了哨兵命令哨兵是一个独立的进程作为进程他会独立运行其原理是哨兵通过发送命令等待服务器响应从而监控运行的多个实例哨兵的作用通过发送命令让返回其运行状态包括主服务器和从服务器当哨兵检测到宕机会自动将切换成然后通过发布订阅模式通知其他从服务器修改配置文件让他们切换为主机然而一个哨兵进程对服务器进行监控可能会出现问题为此我们可以使用多个哨兵进行监控各个哨兵相互监控这样就形成了多哨兵模式假设主服务器宕机哨兵先检测到这个结果系统并不会立马进行过程仅仅是哨兵主观的认为主服务器不可用这个现象称为主观下线当后面的哨兵也检测到主服务器不可用并且达到一定数量那么哨兵之间会进行一次投票投票的结果由一个哨兵发起进行故障转移操作切换成功后通过发布订阅模式让各个哨兵把自己的监控的从服务器实现切换主机这个过称为客观下线测试配置哨兵的配置文件名字不能有问题回到我们专门的测试服务器位置分析配置哨兵配置文件被监控的名称主机端口后面这个数字代表主机挂了投票看让谁替换成主机就会变为主机启动哨兵查看哨兵日志这个时候如果主机突然挂彩了宕机哨兵回先去检测然后设置新的主机这时候确实把我们的作为了新的主机假如主机修复好了他又重新连接回来了哨兵日志这时候就算原主机回来了也会被归并到新的主机下这就是哨兵模式的规则哨兵优缺点优点哨兵集群基于主从复制模式所有主从配置的优点他都有主从可以切换故障可以转移系统可用性会更好哨兵模式就是主从模式的升级手动到自动更加健壮缺点不好在线扩容集群容量一旦到达上限在线扩容就十分麻烦实现哨兵模式的配置其实是很麻烦的里面有很多选择哨兵模式完整配置文件了解哨兵实例运行的端口默认哨兵的工作目录哨兵监控的主节点的可以自己命名的主节点名字只能由字母数字这三个字符组成当这些个数哨兵认为主节点失联那么这时客观上认为主节点失联了当在实例中开启了授权密码这样所有连接实例的客户端都要提供密码设置哨兵连接主从的密码注意必须为主从设置一样的验证密码指定多少毫秒之后主节点没有应答哨兵此时哨兵主观上认为主节点下线默认秒这个配置项指定了在发生主备切换时最多可以有多少个同时对新的进行同步这个数字越小完成所需的时间就越长但是如果这个数字越大就意味着越多的因为而不可用可以通过将这个值设为来保证每次只有一个处于不能处理命令请求的状态故障转移的超时时间可以用在以下这些方面同一个对同一个两次之间的间隔时间当一个从一个错误的那里同步数据开始计算时间直到被纠正为向正确的那里同步数据时当想要取消一个正在进行的所需要的时间当进行时配置所有指向新的所需的最大时间不过即使过了这个超时依然会被正确配置为指向但是就不按所配置的规则来了默认三分钟配置当某一事件发生时所需要执行的脚本可以通过脚本来通知管理员例如当系统运行不正常时发邮件通知相关人员对于脚本的运行结果有以下规则若脚本执行后返回那么该脚本稍后将会被再次执行重复次数目前默认为若脚本执行后返回或者比更高的一个返回值脚本将不会重复执行如果脚本在执行过程中由于收到系统中断信号被终止了则同返回值为时的行为相同一个脚本的最大执行时间为如果超过这个时间脚本将会被一个信号终止之后重新执行通知型脚本当有任何警告级别的事件发生时比如说实例的主观失效和客观失效等等将会去调用这个脚本这时这个脚本应该通过邮件等方式去通知系统管理员关于系统不正常运行的信息调用该脚本时将传给脚本两个参数一个是事件的类型一个是事件的描述如果配置文件中配置了这个脚本路径那么必须保证这个脚本存在于这个路径并且是可执行的否则无法正常启动成功通知脚本客户端重新配置主节点参数脚本当一个由于而发生改变时这个脚本将会被调用通知相关的客户端关于地址已经发生改变的信息以下参数将会在调用脚本时传给脚本目前总是是或者中的一个参数是用来和旧的和新的即旧的通信的这个脚本应该是通用的能被多次调用不是针对性的缓存穿透和雪崩缓存的使用极大的提升了应用程序的性能和效率特别是数据查询方面但同时它也带来了一些问题其中最要害的问题就是数据的一致性问题从严格意义上讲这个问题无解如果对数据一致性要求很好那么就不适用缓存另外的一些典型问题就是缓存穿透缓存雪崩和缓存击穿目前都有很多比较流行的解决方式缓存穿透概念缓存穿透的概念很简单用户想要查询一个数据发现内存数据库没有也就是缓存没有命中于是向持久层数据库查询发现也没有于是本次查询失败当用户很多的时候缓存都没有命中秒杀就是都去请求了持久层数据库这就会给持久层数据库造成大压力这时候就相当于出现了缓存穿透解决方案布隆过滤器布隆过滤器是一种数据结构对所有可能查询的参数以形式存储现在控制层进行校验不符合规则丢弃从而避免了对底层存储系统的查询压力缓存空对象当存储层不命中后即使返回空对象也将其缓存起来同时会设置一个过期时间之后在访问这个数据将会从缓存中获取保护了后端的数据源但是这个方法存在两个问题如果空值能被缓存下来这就意味着缓存需要更多的空间存储更多的键因为这个当中可能会有很多的空值和键即使对空值设置了过期时间还会存在缓存层和存储层的数据会有一段时间窗口不一致这对于需要保持一致性的业务会有影响缓存击穿概念缓存击穿是指一个非常热点不停的扛着大量并发大并发集中对这个点进行访问当在这个瞬间失效持续的大并发就穿破缓存直接请求数据库就像在一个屏障上凿开了一个洞当某个在过期的瞬间有大量请求并发访问这类数据一般是热点数据由于缓存过期会同时访问数据库来查询最新的数据并且回写缓存会导致数据库压力瞬间过大解决方案设置热点数据永不过期从缓存层来看没有设置过期事件所以不会出现热点过期后产生的问题加互斥锁分布式锁使用分布式锁保证对于每个同时只有一个线程去查询后端服务其他线程没有活动分布式锁的权限因此只需要等待即可这种方式将高并发的压力转移到了分布式锁因此对分布式锁的考验极大缓存雪崩概念缓存雪崩是指在某一个时间段缓存几种过期失效宕机产生雪崩的原因之一比如写文本时马上就要到双十二零点很快就迎来一波抢购这波商品比较集中的放入了缓存假设缓存缓存一个小时到凌晨一点钟这批商品的缓存就都过期了而对于这批商品的查询访问都落到数据库上数据库产生周期性的压力波值于是所有的请求都会达到存储层存储层的调用量就会爆增造成存储器也会挂掉的情况其实集中过期不是最致命的比较致命的缓存雪崩是缓存服务器某个节点宕机或者断网因为自然原因形成的缓存雪崩一定是在某个时间段集中创建缓存这个时候数据库也会顶住压力无非是对数据库产生周期性的压力而已而缓存服务节点的宕机对数据库服务器造成的压力是不可预知的很有可能瞬间就把数据库压垮双十一停到一些服务如退款保证主要服务可用解决方案高可用这个思想的含义是既然有可能挂掉那我多增设几台服务器这样一台挂掉之后其他的还可以继续工作其实就是搭建的集群异地多活限流降级这个解决方案的思想是在缓存失效后通过加锁或者队列来控制读取数据库写缓存的线程数量比如对某个只允许一个线程查询数据和写缓存其他线程等待数据预热数据预热的含义就是在正式部署之前我先把可能的数据线预先访问一遍这样部分可能大量访问的数据就会加载到缓存中在即将发生大并发前手动触发加载缓存不同的设置不同的过期时间然缓存失效的事件点尽量均匀这里对于缓存穿透和击穿还有缓存雪崩只做简单了解后面补齐详细的东西',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-08 10:48:36',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="七岁就很浪" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">我的</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.cnblogs.com/qisui/" title="博客园"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/blog.ico" alt="博客园"/><span class="back-menu-item-text">博客园</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">常用</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.processon.com/" title="processon画图"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/processon.ico" alt="processon画图"/><span class="back-menu-item-text">processon画图</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">七岁就很浪</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/2TQtWAnv8Of1ykp.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOF/" style="font-size: 1.05rem;">AOF<sup>1</sup></a><a href="/tags/AOP/" style="font-size: 1.05rem;">AOP<sup>1</sup></a><a href="/tags/Ajax/" style="font-size: 1.05rem;">Ajax<sup>1</sup></a><a href="/tags/Druid/" style="font-size: 1.05rem;">Druid<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>2</sup></a><a href="/tags/IoC/" style="font-size: 1.05rem;">IoC<sup>1</sup></a><a href="/tags/JSON/" style="font-size: 1.05rem;">JSON<sup>1</sup></a><a href="/tags/JSP/" style="font-size: 1.05rem;">JSP<sup>1</sup></a><a href="/tags/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 1.05rem;">Java多线程<sup>1</sup></a><a href="/tags/Java%E8%BF%9B%E9%98%B6/" style="font-size: 1.05rem;">Java进阶<sup>2</sup></a><a href="/tags/Linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" style="font-size: 1.05rem;">Linux基本命令<sup>1</sup></a><a href="/tags/Linux%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">Linux基础<sup>1</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>1</sup></a><a href="/tags/MyBatis-plus/" style="font-size: 1.05rem;">MyBatis-plus<sup>2</sup></a><a href="/tags/MySQL%E5%9F%BA%E7%A1%80/" style="font-size: 1.05rem;">MySQL基础<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 1.05rem;">Mybatis<sup>1</sup></a><a href="/tags/RDB/" style="font-size: 1.05rem;">RDB<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 1.05rem;">Redis<sup>2</sup></a><a href="/tags/RestFul/" style="font-size: 1.05rem;">RestFul<sup>1</sup></a><a href="/tags/Servlet/" style="font-size: 1.05rem;">Servlet<sup>1</sup></a><a href="/tags/Shiro/" style="font-size: 1.05rem;">Shiro<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>1</sup></a><a href="/tags/SpringBoot-CRUD/" style="font-size: 1.05rem;">SpringBoot-CRUD<sup>1</sup></a><a href="/tags/SpringBoot%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">SpringBoot原理<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 1.05rem;">SpringMVC<sup>1</sup></a><a href="/tags/SpringSecurity/" style="font-size: 1.05rem;">SpringSecurity<sup>1</sup></a><a href="/tags/Spring%E4%BA%8B%E5%8A%A1/" style="font-size: 1.05rem;">Spring事务<sup>1</sup></a><a href="/tags/Swagger/" style="font-size: 1.05rem;">Swagger<sup>1</sup></a><a href="/tags/Thymeleaf/" style="font-size: 1.05rem;">Thymeleaf<sup>1</sup></a><a href="/tags/Tomcat/" style="font-size: 1.05rem;">Tomcat<sup>1</sup></a><a href="/tags/Yaml/" style="font-size: 1.05rem;">Yaml<sup>1</sup></a><a href="/tags/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 1.05rem;">cron表达式<sup>1</sup></a><a href="/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 1.05rem;">代码生成器<sup>1</sup></a><a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" style="font-size: 1.05rem;">国际化<sup>1</sup></a><a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 1.05rem;">安全<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6task/" style="font-size: 1.05rem;">定时task<sup>1</sup></a><a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 1.05rem;">年度总结<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5task/" style="font-size: 1.05rem;">异步task<sup>1</sup></a><a href="/tags/%E6%8B%A6%E6%88%AA%E5%99%A8/" style="font-size: 1.05rem;">拦截器<sup>2</sup></a><a href="/tags/%E9%82%AE%E4%BB%B6task/" style="font-size: 1.05rem;">邮件task<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url">框架</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Redis/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Redis</span></a><a class="article-meta__tags" href="/tags/RDB/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>RDB</span></a><a class="article-meta__tags" href="/tags/AOF/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AOF</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Redis进阶</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2023-08-01T00:14:20.000Z" title="发表于 2023-08-01 08:14:20">2023-08-01</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-01-08T02:48:36.749Z" title="更新于 2024-01-08 10:48:36">2024-01-08</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Redis进阶"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为成都"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>成都</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://s2.loli.net/2024/01/08/zNxebMYtJmv86PX.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://humbledong.github.io/undefined/505826b8.html"><header><a class="post-meta-categories" href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url">框架</a><a href="/tags/Redis/" tabindex="-1" itemprop="url">Redis</a><a href="/tags/RDB/" tabindex="-1" itemprop="url">RDB</a><a href="/tags/AOF/" tabindex="-1" itemprop="url">AOF</a><h1 id="CrawlerTitle" itemprop="name headline">Redis进阶</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">小东</span><time itemprop="dateCreated datePublished" datetime="2023-08-01T00:14:20.000Z" title="发表于 2023-08-01 08:14:20">2023-08-01</time><time itemprop="dateCreated datePublished" datetime="2024-01-08T02:48:36.749Z" title="更新于 2024-01-08 10:48:36">2024-01-08</time></header><h1 id="Reids进阶"><a href="#Reids进阶" class="headerlink" title="Reids进阶"></a>Reids进阶</h1><h2 id="Redis-conf-配置"><a href="#Redis-conf-配置" class="headerlink" title="Redis.conf 配置"></a>Redis.conf 配置</h2><p>启动的时候，通过这个配置启动</p>
+<blockquote>
+<p>单位</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Redis configuration file example.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that in order to read the configuration file, Redis must be</span></span><br><span class="line"><span class="comment"># started with the file path as first argument:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ./redis-server /path/to/redis.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Note on units: when memory size is needed, it is possible to specify</span></span><br><span class="line"><span class="comment"># it in the usual form of 1k 5GB 4M and so forth:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 1k =&gt; 1000 bytes</span></span><br><span class="line"><span class="comment"># 1kb =&gt; 1024 bytes</span></span><br><span class="line"><span class="comment"># 1m =&gt; 1000000 bytes</span></span><br><span class="line"><span class="comment"># 1mb =&gt; 1024*1024 bytes</span></span><br><span class="line"><span class="comment"># 1g =&gt; 1000000000 bytes</span></span><br><span class="line"><span class="comment"># 1gb =&gt; 1024*1024*1024 bytes</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># units are case insensitive so 1GB 1Gb 1gB are all the same.</span></span><br></pre></td></tr></table></figure>
+
+<p>1.配置文件unit单位对大小写不敏感</p>
+<blockquote>
+<p>包含</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">################################## INCLUDES ###################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Include one or more other config files here.  This is useful if you</span></span><br><span class="line"><span class="comment"># have a standard template that goes to all Redis servers but also need</span></span><br><span class="line"><span class="comment"># to customize a few per-server settings.  Include files can include</span></span><br><span class="line"><span class="comment"># other files, so use this wisely.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that option &quot;include&quot; won&#x27;t be rewritten by command &quot;CONFIG REWRITE&quot;</span></span><br><span class="line"><span class="comment"># from admin or Redis Sentinel. Since Redis always uses the last processed</span></span><br><span class="line"><span class="comment"># line as value of a configuration directive, you&#x27;d better put includes</span></span><br><span class="line"><span class="comment"># at the beginning of this file to avoid overwriting config change at runtime.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If instead you are interested in using includes to override configuration</span></span><br><span class="line"><span class="comment"># options, it is better to use include as the last line.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Included paths may contain wildcards. All files matching the wildcards will</span></span><br><span class="line"><span class="comment"># be included in alphabetical order.</span></span><br><span class="line"><span class="comment"># Note that if an include path contains a wildcards but no files match it when</span></span><br><span class="line"><span class="comment"># the server is started, the include statement will be ignored and no error will</span></span><br><span class="line"><span class="comment"># be emitted.  It is safe, therefore, to include wildcard files from empty</span></span><br><span class="line"><span class="comment"># directories.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># include /path/to/local.conf</span></span><br><span class="line"><span class="comment"># include /path/to/other.conf</span></span><br><span class="line"><span class="comment"># include /path/to/fragments/*.conf</span></span><br><span class="line"><span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>就是好比我们之前的spring，import之类的include包含</p>
+<blockquote>
+<p>网络</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bind</span> 0.0.0.0          <span class="comment">#绑定的ip默认是本机127.0.0.1</span></span><br><span class="line">protected-mode no     <span class="comment">#保护模式是否开启 默认是yes</span></span><br><span class="line">port 6379             <span class="comment">#端口设置</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>通用 GENERAL</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">daemonize <span class="built_in">yes</span>    <span class="comment">#以守护线程的方式进行，默认是no，我们需要自己开启为yes</span></span><br><span class="line"></span><br><span class="line">pidfile /var/run/redis_6379.pid <span class="comment">#如果以后台的方式运行，我们就需要指定一个pid文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#日志</span></span><br><span class="line"><span class="comment"># Specify the server verbosity level.</span></span><br><span class="line"><span class="comment"># This can be one of:</span></span><br><span class="line"><span class="comment"># debug (a lot of information, useful for development/testing)</span></span><br><span class="line"><span class="comment"># verbose (many rarely useful info, but not a mess like the debug level)</span></span><br><span class="line"><span class="comment"># notice (moderately verbose, what you want in production probably)</span></span><br><span class="line"><span class="comment"># warning (only very important / critical messages are logged)</span></span><br><span class="line"><span class="comment"># nothing (nothing is logged)</span></span><br><span class="line">loglevel notice</span><br><span class="line"></span><br><span class="line">logfile <span class="string">&quot;&quot;</span>		<span class="comment">#日志的文件位置名</span></span><br><span class="line">databases 16    <span class="comment">#数据库数量，默认是16个数据库</span></span><br><span class="line">always-show-logo no  <span class="comment">#是否总是显示LOGO</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>快照</p>
+</blockquote>
+<p>持久化，在规定的时间内，执行了多少次操作，则会持久化到文件rdb，aof</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">stop-writes-on-bgsave-error <span class="built_in">yes</span> <span class="comment">#持久化如果出错的话，是否还要继续工作</span></span><br><span class="line">rdbcompression <span class="built_in">yes</span>   <span class="comment">#是否压缩rdb文件，需要消耗一些cpu资源</span></span><br><span class="line">rdbchecksum <span class="built_in">yes</span> <span class="comment">#保存rdb文件的时候，运行错误的检查校验</span></span><br><span class="line"><span class="built_in">dir</span> ./ <span class="comment">#rdb 文件保存的目录</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>REPLICATION 复制，后面主从复制的时候了解</p>
+</blockquote>
+<blockquote>
+<p>安全</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># requirepass foobared</span></span><br><span class="line"></span><br><span class="line">默认是没有密码的</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; config <span class="built_in">set</span> requirepass <span class="string">&quot;123456&quot;</span> <span class="comment">#设置redis密码</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; config get requirepass <span class="comment">#获取密码</span></span><br><span class="line">1) <span class="string">&quot;requirepass&quot;</span></span><br><span class="line">2) <span class="string">&quot;123456&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>限制客户端 clients</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># maxclients 10000  #设置能连接上redis的最大客户端的数量</span></span><br><span class="line">maxmemory &lt;bytes&gt;  <span class="comment">#redis 配置最大的内存容量</span></span><br><span class="line">maxmemory-policy noevicition <span class="comment">#内存达到上限之后的处理策略</span></span><br><span class="line">	1.volatile-lru：只对设置了过期时间的key进行LRU（默认值）</span><br><span class="line">	2.allkeys-lru: 删除lru算法的key</span><br><span class="line">	3.volatile-random：随机删除即将过期的key</span><br><span class="line">	4.allkeys-random：随机删除</span><br><span class="line">	5.volatile-ttl：删除即将过期的</span><br><span class="line">	6.noevicition：永不过期，返回错误</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>APPEND ONLY 模式  AOF配置</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">appendonly no  </span><br><span class="line"><span class="comment">#默认是不开启aof模式的，默认是以rdb方式持久化的，在大部分情况下，rdb完全够用！</span></span><br><span class="line">appendfilename <span class="string">&quot;appendonly.aof&quot;</span></span><br><span class="line"><span class="comment">#持久化的文件的名字</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># appendfsync always  #每次修改都会sync，消耗性能</span></span><br><span class="line">appendfsync everysec  <span class="comment">#每秒执行一次sync，可能会丢失这一秒的数据！</span></span><br><span class="line"><span class="comment"># appendfsync no      #不执行sync，这个时候操作系统自己同步数据，速度最快</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h2><p>Redis是内存数据库，如果不将内存中的数据库保存到磁盘，那么一旦服务器进程退出，服务器中的数据库状态也会消失，所以Redis提供了持久化功能！</p>
+<h3 id="RDB（Redis-DataBase）"><a href="#RDB（Redis-DataBase）" class="headerlink" title="RDB（Redis DataBase）"></a>RDB（Redis DataBase）</h3><blockquote>
+<p>什么是RDB</p>
+</blockquote>
+<p>原理：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/ZAnK7EMY4UVN8kD.png" alt="image-20231227171117579"></p>
+<p>​		在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是Snapshot快照，它恢复时是将快照文件直接读到内存里。</p>
+<p>​		Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的。这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点事最后一次持久化后的数据可能丢失。我们默认的就是RDB，一般情况下不需要修改这个配置。</p>
+<p>​		有时候在生产环境会将这个文件进行备份</p>
+<p><strong>rdb保存的文件是dump.rdb</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/MVgT9jLi4F2US8r.png" alt="image-20231227165017017"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/AHiyL2Tn7whMXpI.png" alt="image-20231227165200523"></p>
+<blockquote>
+<p>触发机制</p>
+</blockquote>
+<p>1、save的规则满足的情况下，会自动触发rdb规则</p>
+<p>2、执行flushall命令，也会触发我们的rdb规则</p>
+<p>3、退出redis，也会生成rdb文件！</p>
+<p>备份就会自动生产一个dump.rdb文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/Bu8EyxUta5hWfHF.png" alt="image-20231227165547727"></p>
+<blockquote>
+<p>恢复rdb文件</p>
+</blockquote>
+<p>1、只需要将rdb文件放在我们redis启动目录即可，redis启动的时候会自动检查dump.rdb文件恢复其中的数据。</p>
+<p>2、查看需要存在的位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; config get <span class="built_in">dir</span></span><br><span class="line">1) <span class="string">&quot;dir&quot;</span></span><br><span class="line">2) <span class="string">&quot;/usr/local/bin&quot;</span></span><br><span class="line"><span class="comment">#如果在这个目录下存在dump.rdb文件，启动就会自动恢复其中的数据</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然Redis它自己配置就已经够了，但是还是需要学习了解</p>
+<blockquote>
+<p>优点</p>
+</blockquote>
+<p>1、适合大规模的数据恢复！如果服务器宕机了，dump.rdb就可以恢复数据</p>
+<p>2、对数据的完整性要求不高！</p>
+<blockquote>
+<p>缺点</p>
+</blockquote>
+<p>1、需要一定的时间间隔进程操作！如果Redis意外宕机了，这个最后一次修改数据就没有了</p>
+<p>2、fork进程的时候，会占用一定的内存空间</p>
+<h3 id="AOF（Append-Only-File）"><a href="#AOF（Append-Only-File）" class="headerlink" title="AOF（Append  Only  File）"></a>AOF（Append  Only  File）</h3><p>将我们的所有命令都记录下来，history，恢复的时候就把这个文件全部再执行一遍！</p>
+<p>AOF默认是文件无限追加，文件会越来越大</p>
+<blockquote>
+<p>什么是AOF</p>
+</blockquote>
+<p>原理：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/28/hSQ2UbYa7uWHF4E.png" alt="image-20231228095911324"></p>
+<p>以日志的形式来记录每个写操作，将Redis执行过的所有指令记录下来（读操作不记录），只许追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，Redis重启的话就根据日志文件的内容将写指令从前到后执行一次完成数据恢复的工作。</p>
+<p><strong>AOF保存的是<code>appendonly.aof</code>文件</strong></p>
+<p>默认是不开启AOF的，需要我们改为yes</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/BeV7XUPgRZJNqAy.png" alt="image-20231227173740270"></p>
+<p>必须重启redis服务</p>
+<p>测试一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-server lddconfig/redis.conf </span></span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k2 v2</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k3 v3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k4 v4</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; SHUTDOWN</span><br><span class="line">not connected&gt; <span class="built_in">exit</span></span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># ls</span></span><br><span class="line">appendonlydir   jemalloc-config  libmcrypt-config  mdecrypt         redis-cli</span><br><span class="line">cosfs           jemalloc.sh      luajit            redis-benchmark  redis-sentinel</span><br><span class="line">docker-compose  jeprof           luajit-2.0.4      redis-check-aof  redis-server</span><br><span class="line">dump.rdb        lddconfig        mcrypt            redis-check-rdb</span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># cd appendonlydir/ #aof文件放在这个目录里面的</span></span><br><span class="line">[root@VM-4-7-centos appendonlydir]<span class="comment"># ls</span></span><br><span class="line">appendonly.aof.1.base.rdb  appendonly.aof.1.incr.aof  appendonly.aof.manifest</span><br></pre></td></tr></table></figure>
+
+<p>查看一下aof文件：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/sUHqRnKjoWQ3cBN.png" alt="image-20231227174557209"></p>
+<blockquote>
+<p>redis-check-aof工具</p>
+</blockquote>
+<p>如果我们此时修改了这个文件的内容，再重启Redis服务就会失败，可以用到我们的修复工具<code>redis-check-aof</code></p>
+<p>修改：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/Dld5PzyEaG3NgvY.png" alt="image-20231227174709953"></p>
+<p>重启我们的Redis服务，直接失败</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/AzwjaQ2r5X9q8bF.png" alt="image-20231227174755387"></p>
+<p>我们使用修复工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">Could not connect to Redis at 127.0.0.1:6379: Connection refused</span><br><span class="line">not connected&gt; <span class="built_in">exit</span></span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-check-aof --fix appendonlydir/appendonly.aof.1.incr.aof </span></span><br><span class="line">Start checking Old-Style AOF</span><br><span class="line">0x              87: Expected \r\n, got: 3131</span><br><span class="line">AOF analyzed: filename=appendonlydir/appendonly.aof.1.incr.aof, size=155, ok_up_to=110, ok_up_to_line=33, diff=45</span><br><span class="line">This will shrink the AOF appendonlydir/appendonly.aof.1.incr.aof from 155 bytes, with 45 bytes, to 110 bytes</span><br><span class="line">Continue? [y/N]: y</span><br><span class="line">Successfully truncated AOF appendonlydir/appendonly.aof.1.incr.aof</span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-server lddconfig/redis.conf </span></span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; get k4</span><br><span class="line">(nil)</span><br><span class="line">127.0.0.1:6379&gt; get k3</span><br><span class="line"><span class="string">&quot;v3&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/Yb9nJWqEBv46cuo.png" alt="image-20231227175012514"></p>
+<p>我们发现最后一次k4的数据没了，去查看我们的aof文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/EXbuJSrxwQfj2Ci.png" alt="image-20231227175107283"></p>
+<p>这里记得去把配置该回去，用redis默认的就够了。</p>
+<blockquote>
+<p>优点和缺点！</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">appendonly no  </span><br><span class="line"><span class="comment">#默认是不开启aof模式的，默认是以rdb方式持久化的，在大部分情况下，rdb完全够用！</span></span><br><span class="line">appendfilename <span class="string">&quot;appendonly.aof&quot;</span></span><br><span class="line"><span class="comment">#持久化的文件的名字</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># appendfsync always  #每次修改都会sync，消耗性能</span></span><br><span class="line">appendfsync everysec  <span class="comment">#每秒执行一次sync，可能会丢失这一秒的数据！</span></span><br><span class="line"><span class="comment"># appendfsync no      #不执行sync，这个时候操作系统自己同步数据，速度最快</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>优点：</p>
+<p>1、每一次修改都同步，文件的完整性会更好！</p>
+<p>2、每秒同步一次，可能会丢失一秒的数据</p>
+<p>3、从不同步，效率是最高的。</p>
+<p>缺点：</p>
+<p>1、相对于数据文件来说，AOF远大于rdb，修复的速度也比rdb慢（rdb也有自己的修复工具）</p>
+<p>2、AOF运行效率也要比rdb慢，所以我们redis默认的配置就是rdb持久化</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/27/bXepucWD34PBZtC.png" alt="image-20231227181704000"></p>
+<p>因为AOF默认是文件无限追加，文件会越来越大</p>
+<p>如果AOF文件大于64MB，fork一个新进程将我们的文件进行重写</p>
+<blockquote>
+<p>扩展</p>
+</blockquote>
+<p>1、RDB持久化方式能够在指定时间间隔内对你的数据进行快照存储</p>
+<p>2、AOF持久化方式记录每次对服务器写的操作，当服务器重启的时候会重新执行这些命令来恢复原始的数据，AOF命令以Redis协议追加保存每次写的从左到文件末尾，Redis还能对AOF文件进行后台重写，使得AOF文件的体积不至于过大。</p>
+<p>3、只做缓存，如果你只希望你的数据在服务器运行的时候存在，你也可以不做任何持久化</p>
+<p>4、同时开启两种持久化方式</p>
+<ul>
+<li>在这种情况下，当Redis重启的时候会优先载入AOF文件来恢复原始的数据，因为在通常情况下AOF文件保存的数据要比RDB文件保存的文件的数据更完整</li>
+<li>RDB的数据不实时，同时使用两者时服务器重启也只会找AOF文件，那要不要只用AOF呢，当然是不建议的，因为RDB更适合用于备份数据库（AOF在不断变化不好备份），快速重启，而且不会有AOF可能潜在的bug，留着作为一个以防万一的手段。</li>
+</ul>
+<p>5、性能建议</p>
+<ul>
+<li>因为RDB文件只用后备用途，建议只在Slave上持久化RDB文件，而且只要15分钟备份一次就够了，只保留<code>save 900 1</code>这条规则</li>
+<li>如果Enable AOF，好处是在最恶劣情况下也只会丢失不超过两秒的数据，启动脚本较简单值load自己的AOF文件即可，代价一是带来了持续的IO，而是AOF rewrite的最后将rewrite过程中产生的新数据写到新文件造成的阻塞几乎是不可能避免的。只要硬盘许可，应该尽量减少AOF rewrite的频率，AOF重写的基础大小默认值64MB太小了，可以设置到5G以上，默认超过原大小的100%大小重写可以改到适当的数值。</li>
+<li>如果不Enable AOF，仅靠Master-Slave-Repllcation实现高可用性也可以，能省掉一大笔IO，也减少了rewrite时带来的系统波动。代价是如果Master&#x2F;Slave同时倒掉，会丢失十几分钟的数据，启动脚本也要比较两个Master&#x2F;Slave中的RDB文件，载入较新的那个。</li>
+</ul>
+<h2 id="Redis订阅发布"><a href="#Redis订阅发布" class="headerlink" title="Redis订阅发布"></a>Redis订阅发布</h2><p>Redis发布订阅（pub&#x2F;sub）是一种消息通信模式：发送者（pub）发送消息，订阅者（sub）接收消息</p>
+<p>Redis客户端可以订阅任意数量的频道</p>
+<p>订阅&#x2F;发布消息图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/28/ilP3C8EwJX9Gstg.png" alt="image-20231228103449975"></p>
+<blockquote>
+<p>命令</p>
+</blockquote>
+<p>这些命令被广泛用于构建即时通信应用，比如网络聊天室（chatRoom）和实时广播，实时提醒等</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>PSUBSCRIBE  pattern [pattern …]</td>
+<td>订阅一个或者多个符合给定模式的频道</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PUBSUB suncommand [argument[argument …]]</td>
+<td>查看订阅与发布系统状态</td>
+</tr>
+<tr>
+<td>3</td>
+<td>PUBLISH channel message</td>
+<td>将信息发送到指定的频道</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PUNSUBSCRIBE pattern [pattern …]</td>
+<td>退订所有给定模式的频道</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SUBSCRIBE channel [channel …]</td>
+<td>订阅给定的一个或多个频道的信息</td>
+</tr>
+<tr>
+<td>6</td>
+<td>UNSUBSCRIBE channel [channel …]</td>
+<td>退订给定的频道</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<p>订阅端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-server lddconfig/redis.conf </span></span><br><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; SUBSCRIBE lddblog <span class="comment">#订阅一个频道 lddblog</span></span><br><span class="line">1) <span class="string">&quot;subscribe&quot;</span></span><br><span class="line">2) <span class="string">&quot;lddblog&quot;</span></span><br><span class="line">3) (<span class="built_in">integer</span>) 1</span><br><span class="line"><span class="comment">#等待读取推送的信息</span></span><br><span class="line">1) <span class="string">&quot;message&quot;</span>         <span class="comment">#消息</span></span><br><span class="line">2) <span class="string">&quot;lddblog&quot;</span>		 <span class="comment">#哪个频道的消息</span></span><br><span class="line">3) <span class="string">&quot;this is my blog&quot;</span> <span class="comment">#消息的具体内容</span></span><br></pre></td></tr></table></figure>
+
+<p>发送端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; PUBLISH lddblog <span class="string">&quot;this is my blog&quot;</span> <span class="comment">#发布者发布消息到频道！</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<blockquote>
+<p>原理</p>
+</blockquote>
+<p>Redis是使用C实现的，通过分析Redis源码里面的pubsub.c文件，了解发布和订阅机制的底层实现，用来可以加深对Redis的理解。</p>
+<p>Redis通过PUBLISH、SUBCRIBE和PSUBSCRIBE等命令实现发布和订阅功能。</p>
+<p>通过SUBCRIBE命令订阅某个频道后，redis-server里维护了一个字典，字典的键就是一个个channel（频道），而字典的值则是一个链表，链表中保存了所有订阅这个channel的客户端。SUBSCRIBE命令的关键，就是将客户端添加到给定channel的订阅链表中。</p>
+<p>通过PUBLISH命令向订阅者发送消息，redis-server会使用给定频道作为键，在它所维护的channel子带你中记录了订阅这个频道的所有客户端的链表，遍历这个链表，将消息发布给所有订阅者。</p>
+<p>Pub&#x2F;Sub从字面上理解就是发布（Publish）与订阅（Subscribe），在Redis中，可以设定对某一个key值进行消息发布及消息订阅，当一个key值上进行了消息发布后，所有订阅它的客户端都会收到相应的消息。这一功能最明显的用法就是用作实时消息系统，比如普通的即时聊天、群聊等等。</p>
+<h2 id="Redis主从复制"><a href="#Redis主从复制" class="headerlink" title="Redis主从复制"></a>Redis主从复制</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>主从复制，是指将一台Redis服务器的数据，复制到其他的Redis服务器。前者称之为主节点（master&#x2F;leader），后者称之为从节点（slave&#x2F;follower）；数据的复制是单向的，只能由主节点到从节点。Master以写为主，Slave以读为主。</p>
+<p>默认情况下，每台Redis服务器都是主节点；且一个主节点可以有多个从节点（或没有从节点），但一个从节点只能由一个主节点。</p>
+<p><strong>主从复制的作用主要包括：</strong></p>
+<p>1、数据冗余：主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。</p>
+<p>2、故障恢复：当主节点出现问题时，可以从主节点提供服务，实现快速的故障恢复；实际上是一种服务的冗余。</p>
+<p>3、负载均衡：在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务（即写Redis数据时应用连接主节点，读Redis数据时应用连接从节点），分担服务器负载；尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高Redis服务器的并发量。</p>
+<p>4、高可用（集群）基石：除了以上作用之外，主从复制还是哨兵模式和集群能实施的基础，因此说主从复制时Redis高可用的基础。</p>
+<p>一般来说，要将Redis运用于工程项目中，只使用一台Redis是万万（宕机）不能的，原因如下：</p>
+<p>1、从结构上，单个Redis服务器会发生单点故障，并且一台服务器需要处理所有的请求负载，压力较大。</p>
+<p>2、从容量上，单个Reds服务器内存容量有限，就算一台Redis服务器内存容量为256G，也不能将所有内存用作Redis存储内存，一般来说，单台Redis最大使用内存不应该超过20G。</p>
+<p>电商网站上的商品，一般都是一次上传，无数次浏览的，说专业点也就是“多读少写”。</p>
+<p>对于这种场景，我们一般是这种架构：</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>只配置从库，不配置主库</p>
+<p>首先，需要查看当前库的信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># redis-cli -p 6379</span></span><br><span class="line">127.0.0.1:6379&gt; info replication  <span class="comment">#查看当前库的信息</span></span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:master            <span class="comment">#角色</span></span><br><span class="line">connected_slaves:0     <span class="comment">#没有从机</span></span><br><span class="line">master_failover_state:no-failover</span><br><span class="line">master_replid:6e3a4aafb4094a398294f82e17dae9e28559557e</span><br><span class="line">master_replid2:03b6866d58bc2f1a84809ce8a417e1cc834a1ef6</span><br><span class="line">master_repl_offset:416</span><br><span class="line">second_repl_offset:269</span><br><span class="line">repl_backlog_active:0</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:0</span><br><span class="line">repl_backlog_histlen:0</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>1.开启四个会话</p>
+</blockquote>
+<p>1个主机，两个从机，一个测试</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/wYltCorvc4GshfP.png" alt="image-20231229095737074"></p>
+<p>现在去配置文件里面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-4-7-centos bin]<span class="comment"># cd lddconfig/</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># ls</span></span><br><span class="line">redis.conf</span><br><span class="line"><span class="comment">#将我们的配置文件复制三份出来</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># cp redis.conf redis79.conf</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># cp redis.conf redis80.conf</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># cp redis.conf redis81.conf</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># ls</span></span><br><span class="line">redis79.conf  redis80.conf  redis81.conf  redis.conf</span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># vim redis79.conf</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># vim redis80.conf</span></span><br><span class="line">[root@VM-4-7-centos lddconfig]<span class="comment"># vim redis81.conf</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>修改内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">port 6381  <span class="comment">#修改端口</span></span><br><span class="line">daemonize <span class="built_in">yes</span> <span class="comment">#修改为守护进程即后台启动</span></span><br><span class="line">pidfile /var/run/redis_6381.pid  <span class="comment">#修改pid文件名</span></span><br><span class="line">logfile “6381.<span class="built_in">log</span>”  <span class="comment">#修改日志导出位置</span></span><br><span class="line">dbfilename dump6381.rdb <span class="comment">#修改rdb文件名</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后分别启动三个Redis服务，通过测试的进程查看信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/cvRKju8d2EDIXNW.png" alt="image-20231229102137451"></p>
+<h3 id="主从复制原理"><a href="#主从复制原理" class="headerlink" title="主从复制原理"></a>主从复制原理</h3><p><strong>默认情况下，每台Redis服务器都是主节点</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/GtmTxIQEOhDJHgP.png" alt="image-20231229102740030"></p>
+<p>这种时候如何实现的我们的主从复制呢？</p>
+<p>我们一般情况下只需要配置从机即可(主79，从80，从81)</p>
+<p>给从机配置主机：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/ngdzvtMaUN2JR7r.png" alt="image-20231229103016628"></p>
+<p>主机有Slave信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/aqsh4MB3roKVkzH.png" alt="image-20231229103128014"></p>
+<p><strong>注：真实的主从配置应该在配置文件中配置，这样的话是永久的，我们这里使用的命令是暂时的</strong></p>
+<p><code>authorize</code>,配置文件配置地点</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/jSghXOF1oJz2dBn.png" alt="image-20231229104831544"></p>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<p>主机可以写操作，<strong>从机只能读操作</strong></p>
+<p>主机中写的所有数据都会被从机自动保存</p>
+<p>主机写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get k1</span><br><span class="line"><span class="string">&quot;v1&quot;</span></span><br><span class="line">127.0.0.1:6379&gt; </span><br></pre></td></tr></table></figure>
+
+<p>从机可以读，但是写不了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6380&gt; get k1</span><br><span class="line"><span class="string">&quot;v1&quot;</span></span><br><span class="line">127.0.0.1:6380&gt; <span class="built_in">set</span> k2 v2</span><br><span class="line">(error) READONLY You can<span class="string">&#x27;t write against a read only replica.</span></span><br><span class="line"><span class="string">127.0.0.1:6380&gt; </span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>细节1：</p>
+<p>​			这个时候如果主机断开连接，从机依旧可以连接到主机，但是没有写操作，这个时候主机如果回来，从机依旧可以获取主机信息</p>
+<p>细节2：</p>
+<p>​			如果是使用命令行配置的主从，如果从机重启就会自动变为主机，但是这时候如果让他又变为从机（例如让80断开然后再连接再设置为79从机），从机也会立马从主机中获取值</p>
+<blockquote>
+<p>复制原理</p>
+</blockquote>
+<p>slave启动成功连接到一个master后会发送一个sync同步命令</p>
+<p>master接受到命令，启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令，在后台进程执行完毕后，master将传送整个数据文件到slave，并完成一次完全同步。<br>全量复制：slave服务在接受到数据库文件数据后，将其存盘并加载到内存中。<br>增量复制：Master继续将所收集到的修改命令一次传给slave，完成同步<br>但是只要是重新连接一次master，全量复制会被自动执行，我们的数据可以在从机中看到</p>
+<h3 id="宕机后手动配置主机"><a href="#宕机后手动配置主机" class="headerlink" title="宕机后手动配置主机"></a>宕机后手动配置主机</h3><p>即做主机又做从机，此时依旧为slave</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/v5NHcUJXMkWqFRC.png" alt="image-20231229104117834"></p>
+<p>实现一下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/Pd9UvyS43FgmCu6.png" alt="image-20231229104511724"></p>
+<p>查看6080节点信息，依旧为从机</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/UVm6GdWXAsRHnqJ.png" alt="image-20231229104616977"></p>
+<p>这时候如果主机宕机了，我们手动把79停了，对从机执行一段命令：</p>
+<p>从机操作：<code>slaveof no one</code></p>
+<p>主机宕机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; shutdown</span><br><span class="line">not connected&gt; <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>查看从机状态：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/rSnJaFswC9Wfm7M.png" alt="image-20231229105343388"></p>
+<p>这时候从机就变主机了</p>
+<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><p>上面我们是手动配置主机，但是我们希望主机宕机后，从机自动变主机，这时候就需要我们的哨兵模式了。</p>
+<p>主从切换的方法是：当主服务器宕机后，需要手动把一台服务器切换为主服务器，需要人工干预，费时费力，还会造成一段时间内服务器不可用。更多的时候我们考虑的是哨兵模式，redis从2.8开始正式提供了sentinel架构来解决这个问题。<br>谋朝篡位的自动版，能够后台监控主机是否故障，如果故障根据投票数自动将从库转换为主库。<br>哨兵模式是一种特殊的模式，首先redis提供了哨兵命令，哨兵是一个独立的进程，作为进程，他会独立运行，其原理是<strong>哨兵通过发送命令，等待redis服务器响应，从而监控运行的多个redis实例</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/wxPRGovct298qnY.png" alt="image-20231229105903041"></p>
+<p>哨兵的作用<br>1.通过发送命令，让redis返回其运行状态，包括主服务器和从服务器<br>2.当哨兵检测到master宕机，会自动将slave切换成master，然后通过发布订阅模式通知其他从服务器修改配置文件，让他们切换为主机<br>然而一个哨兵进程对redis服务器进行监控，可能会出现问题，为此，我们可以使用多个哨兵进行监控，各个哨兵相互监控，这样就形成了多哨兵模式。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/w3AoyxcsFzmDYUH.png" alt="image-20231229113058043"></p>
+<p>假设主服务器宕机，哨兵1先检测到这个结果，系统并不会立马进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象称为主观下线。当后面的哨兵也检测到主服务器不可用，并且达到一定数量，那么哨兵之间会进行一次投票，投票的结果由一个哨兵发起，进行failover（故障转移操作）。q切换成功后，通过发布订阅模式，让各个哨兵把自己的监控的从服务器实现切换主机，这个过称为客观下线</p>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<p>1.配置哨兵的配置文件</p>
+<p>名字不能有问题，回到我们专门的测试服务器位置：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/CF8TZwnRX1WNuAY.png" alt="image-20231229113443620"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/X1MOdjzsUieJCNW.png" alt="image-20231229113416341"></p>
+<p>分析：</p>
+<p>配置哨兵配置文件：</p>
+<p>sentinel.conf:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sentinel monitor myredis 127.0.0.1 6379 1</span><br><span class="line"><span class="comment">#sentinel monitor 被监控的名称 主机 端口 1</span></span><br></pre></td></tr></table></figure>
+
+<p>后面这个数字1，代表主机挂了，slave投票看让谁替换成主机，就会变为主机。</p>
+<p>2.启动哨兵：</p>
+<p><code>redis-sentinel lddconfig/sentinel.conf</code></p>
+<p>查看哨兵日志：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/4lEFmnZrGhBpKax.png" alt="image-20231229114629849"></p>
+<p>这个时候，如果主机突然挂彩了（宕机）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; shutdown</span><br><span class="line">(0.82s)</span><br><span class="line">not connected&gt; </span><br></pre></td></tr></table></figure>
+
+<p>哨兵回先去检测，然后设置新的主机</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/WRfBjgakzrKx3qs.png" alt="image-20231229115122542"></p>
+<p>这时候确实把我们的6381作为了新的主机</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/kAOihELelFc4sGo.png" alt="image-20231229115257367"></p>
+<p>假如，主机6379修复好了，他又重新连接回来了</p>
+<p>哨兵日志：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/iEv5z2aL4qjwcm9.png" alt="image-20231229115455471"></p>
+<p>这时候就算原主机回来了，也会被归并到新的主机6381下，这就是哨兵模式的规则</p>
+<blockquote>
+<p>哨兵优缺点</p>
+</blockquote>
+<p>优点：<br>1.哨兵集群，基于主从复制模式，所有主从配置的优点他都有<br>2.主从可以切换，故障可以转移，系统可用性会更好<br>3.哨兵模式就是主从模式的升级，手动到自动，更加健壮<br>缺点：<br>1.redis不好在线扩容，集群容量一旦到达上限，在线扩容就十分麻烦<br>2.实现哨兵模式的配置其实是很麻烦的，里面有很多选择</p>
+<blockquote>
+<p>哨兵模式完整配置文件（了解）</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example sentinel.conf</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 哨兵sentinel实例运行的端口 默认26379</span></span><br><span class="line">port 26379</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 哨兵sentinel的工作目录</span></span><br><span class="line"><span class="built_in">dir</span> /tmp</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 哨兵sentinel监控的redis主节点的 ip port </span></span><br><span class="line"><span class="comment"># master-name  可以自己命名的主节点名字 只能由字母A-z、数字0-9 、这三个字符&quot;.-_&quot;组成。</span></span><br><span class="line"><span class="comment"># quorum 当这些quorum个数sentinel哨兵认为master主节点失联 那么这时 客观上认为主节点失联了</span></span><br><span class="line"><span class="comment"># sentinel monitor &lt;master-name&gt; &lt;ip&gt; &lt;redis-port&gt; &lt;quorum&gt;</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6379 1</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 当在Redis实例中开启了requirepass foobared 授权密码 这样所有连接Redis实例的客户端都要提供密码</span></span><br><span class="line"><span class="comment"># 设置哨兵sentinel 连接主从的密码 注意必须为主从设置一样的验证密码</span></span><br><span class="line"><span class="comment"># sentinel auth-pass &lt;master-name&gt; &lt;password&gt;</span></span><br><span class="line">sentinel auth-pass mymaster MySUPER--secret-0123passw0rd</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># 指定多少毫秒之后 主节点没有应答哨兵sentinel 此时 哨兵主观上认为主节点下线 默认30秒</span></span><br><span class="line"><span class="comment"># sentinel down-after-milliseconds &lt;master-name&gt; &lt;milliseconds&gt;</span></span><br><span class="line">sentinel down-after-milliseconds mymaster 30000</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行 同步，</span></span><br><span class="line"><span class="comment"># 这个数字越小，完成failover所需的时间就越长，</span></span><br><span class="line"><span class="comment"># 但是如果这个数字越大，就意味着越 多的slave因为replication而不可用。</span></span><br><span class="line"><span class="comment"># 可以通过将这个值设为 1 来保证每次只有一个slave 处于不能处理命令请求的状态。</span></span><br><span class="line"><span class="comment"># sentinel parallel-syncs &lt;master-name&gt; &lt;numslaves&gt;</span></span><br><span class="line">sentinel parallel-syncs mymaster 1</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># 故障转移的超时时间 failover-timeout 可以用在以下这些方面： </span></span><br><span class="line"><span class="comment">#1. 同一个sentinel对同一个master两次failover之间的间隔时间。</span></span><br><span class="line"><span class="comment">#2. 当一个slave从一个错误的master那里同步数据开始计算时间。直到slave被纠正为向正确的master那里同步数据时。</span></span><br><span class="line"><span class="comment">#3.当想要取消一个正在进行的failover所需要的时间。  </span></span><br><span class="line"><span class="comment">#4.当进行failover时，配置所有slaves指向新的master所需的最大时间。不过，即使过了这个超时，slaves依然会被正确配置为指向master，但是就不按parallel-syncs所配置的规则来了</span></span><br><span class="line"><span class="comment"># 默认三分钟</span></span><br><span class="line"><span class="comment"># sentinel failover-timeout &lt;master-name&gt; &lt;milliseconds&gt;</span></span><br><span class="line">sentinel failover-timeout mymaster 180000</span><br><span class="line"> </span><br><span class="line"><span class="comment"># SCRIPTS EXECUTION</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#配置当某一事件发生时所需要执行的脚本，可以通过脚本来通知管理员，例如当系统运行不正常时发邮件通知相关人员。</span></span><br><span class="line"><span class="comment">#对于脚本的运行结果有以下规则：</span></span><br><span class="line"><span class="comment">#若脚本执行后返回1，那么该脚本稍后将会被再次执行，重复次数目前默认为10</span></span><br><span class="line"><span class="comment">#若脚本执行后返回2，或者比2更高的一个返回值，脚本将不会重复执行。</span></span><br><span class="line"><span class="comment">#如果脚本在执行过程中由于收到系统中断信号被终止了，则同返回值为1时的行为相同。</span></span><br><span class="line"><span class="comment">#一个脚本的最大执行时间为60s，如果超过这个时间，脚本将会被一个SIGKILL信号终止，之后重新执行。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#通知型脚本:当sentinel有任何警告级别的事件发生时（比如说redis实例的主观失效和客观失效等等），将会去调用这个脚本，</span></span><br><span class="line"><span class="comment">#这时这个脚本应该通过邮件，SMS等方式去通知系统管理员关于系统不正常运行的信息。调用该脚本时，将传给脚本两个参数，</span></span><br><span class="line"><span class="comment">#一个是事件的类型，</span></span><br><span class="line"><span class="comment">#一个是事件的描述。</span></span><br><span class="line"><span class="comment">#如果sentinel.conf配置文件中配置了这个脚本路径，那么必须保证这个脚本存在于这个路径，并且是可执行的，否则sentinel无法正常启动成功。</span></span><br><span class="line"><span class="comment">#通知脚本</span></span><br><span class="line"><span class="comment"># sentinel notification-script &lt;master-name&gt; &lt;script-path&gt;</span></span><br><span class="line">  sentinel notification-script mymaster /var/redis/notify.sh</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 客户端重新配置主节点参数脚本</span></span><br><span class="line"><span class="comment"># 当一个master由于failover而发生改变时，这个脚本将会被调用，通知相关的客户端关于master地址已经发生改变的信息。</span></span><br><span class="line"><span class="comment"># 以下参数将会在调用脚本时传给脚本:</span></span><br><span class="line"><span class="comment"># &lt;master-name&gt; &lt;role&gt; &lt;state&gt; &lt;from-ip&gt; &lt;from-port&gt; &lt;to-ip&gt; &lt;to-port&gt;</span></span><br><span class="line"><span class="comment"># 目前&lt;state&gt;总是“failover”,</span></span><br><span class="line"><span class="comment"># &lt;role&gt;是“leader”或者“observer”中的一个。 </span></span><br><span class="line"><span class="comment"># 参数 from-ip, from-port, to-ip, to-port是用来和旧的master和新的master(即旧的slave)通信的</span></span><br><span class="line"><span class="comment"># 这个脚本应该是通用的，能被多次调用，不是针对性的。</span></span><br><span class="line"><span class="comment"># sentinel client-reconfig-script &lt;master-name&gt; &lt;script-path&gt;</span></span><br><span class="line">sentinel client-reconfig-script mymaster /var/redis/reconfig.sh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="Redis缓存穿透和雪崩"><a href="#Redis缓存穿透和雪崩" class="headerlink" title="Redis缓存穿透和雪崩"></a>Redis缓存穿透和雪崩</h2><p>Redis缓存的使用，极大的提升了应用程序的性能和效率，特别是数据查询方面。但同时，它也带来了一些问题，其中，最要害的问题，就是数据的一致性问题，从严格意义上讲，这个问题无解。如果对数据一致性要求很好，那么就不适用缓存。</p>
+<p>另外的一些典型问题就是，缓存穿透、缓存雪崩和缓存击穿。目前，都有很多比较流行的解决方式。</p>
+<h3 id="缓存穿透："><a href="#缓存穿透：" class="headerlink" title="缓存穿透："></a>缓存穿透：</h3><blockquote>
+<p>概念</p>
+</blockquote>
+<p>​	缓存穿透的概念很简单，用户想要查询一个数据，发现Redis内存数据库没有，也就是缓存没有命中，于是向持久层数据库查询。发现也没有，于是本次查询失败，当用户很多的时候，缓存都没有命中（秒杀！），就是都去请求了持久层数据库。这就会给持久层数据库造成大压力，这时候就相当于出现了缓存穿透。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/xNr9duvjJOcGLSM.png" alt="image-20231229144243643"></p>
+<blockquote>
+<p><strong>解决方案：</strong></p>
+</blockquote>
+<p>布隆过滤器：</p>
+<p>布隆过滤器是一种数据结构，对所有可能查询的参数以hash形式存储，现在控制层进行校验，不符合规则丢弃，从而避免了对底层存储系统的查询压力</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/12/29/Dm2NdTSoMnyXRO1.png" alt="image-20231229145018014"></p>
+<p>缓存空对象<br>当存储层不命中后，即使返回空对象也将其缓存起来，同时会设置一个过期时间，之后在访问这个数据将会从缓存中获取，保护了后端的数据源<br>但是这个方法存在两个问题<br>1.如果空值能被缓存下来，这就意味着缓存需要更多的空间存储更多的键，因为这个当中可能会有很多的空值和键<br>2.即使对空值设置了过期时间，还会存在缓存层和存储层的数据会有一段时间窗口不一致，这对于需要保持一致性的业务会有影响</p>
+<h3 id="缓存击穿："><a href="#缓存击穿：" class="headerlink" title="缓存击穿："></a>缓存击穿：</h3><blockquote>
+<p>概念</p>
+</blockquote>
+<p>缓存击穿是指一个key非常热点，不停的扛着大量并发，大并发集中对这个点进行访问，当key在这个瞬间失效，持续的大并发就穿破缓存，直接请求数据库，就像在一个屏障上凿开了一个洞。<br>当某个key在过期的瞬间，有大量请求并发访问，这类数据一般是热点数据，由于缓存过期，会同时访问数据库来查询最新的数据，并且回写缓存，会导致数据库压力瞬间过大。</p>
+<blockquote>
+<p>解决方案：</p>
+</blockquote>
+<p><strong>设置热点数据永不过期</strong></p>
+<p>从缓存层来看，没有设置过期事件，所以不会出现热点key过期后产生的问题。</p>
+<p><strong>加互斥锁</strong></p>
+<p>分布式锁：使用分布式锁，保证对于每个key同时只有一个线程去查询后端服务，其他线程没有活动分布式锁的权限，因此只需要等待即可。这种方式将高并发的压力转移到了分布式锁，因此对分布式锁的考验极大。</p>
+<h3 id="缓存雪崩："><a href="#缓存雪崩：" class="headerlink" title="缓存雪崩："></a>缓存雪崩：</h3><blockquote>
+<p>概念</p>
+</blockquote>
+<p>缓存雪崩，是指在某一个时间段，缓存几种过期失效，Redis宕机！</p>
+<p>产生雪崩的原因之一，比如写文本时，马上就要到双十二零点，很快就迎来一波抢购，这波商品比较集中的放入了缓存假设缓存缓存一个小时。到凌晨一点钟，这批商品的缓存就都过期了。而对于这批商品的查询访问都落到数据库上，数据库产生周期性的压力波值。于是所有的请求都会达到存储层，存储层的调用量就会爆增，造成存储器也会挂掉的情况。</p>
+<p>其实集中过期不是最致命的，比较致命的缓存雪崩是缓存服务器某个节点宕机或者断网。因为自然原因形成的缓存雪崩，一定是在某个时间段集中创建缓存，这个时候数据库也会顶住压力，无非是对数据库产生周期性的压力而已。而缓存服务节点的宕机，对数据库服务器造成的压力是不可预知的，很有可能瞬间就把数据库压垮。<br>双十一：停到一些服务。如退款（保证主要服务可用）</p>
+<blockquote>
+<p>解决方案</p>
+</blockquote>
+<p><strong>Redis高可用</strong></p>
+<p>这个思想的含义是：既然Redis有可能挂掉，那我多增设几台服务器，这样一台挂掉之后其他的还可以继续工作，其实就是搭建的集群（异地多活）</p>
+<p><strong>限流降级</strong>（SpringCloud）</p>
+<p>这个解决方案的思想是：在缓存失效后，通过加锁或者队列来控制读取数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待。</p>
+<p><strong>数据预热</strong></p>
+<p>数据预热的含义就是在正式部署之前，我先把可能的数据线预先访问一遍，这样部分可能大量访问的数据就会加载到缓存中，在即将发生大并发前手动触发加载缓存不同的key，设置不同的过期时间，然缓存失效的事件点尽量均匀。</p>
+<p>这里对于缓存穿透和击穿，还有缓存雪崩只做简单了解，后面补齐详细的东西。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">小东</div><div class="post-copyright__author_desc">道阻且长 行则将至</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://humbledong.github.io/undefined/505826b8.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://humbledong.github.io/undefined/505826b8.html')">Redis进阶</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/6TXERj7mhpLnsGB.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://s2.loli.net/2024/01/06/2TQtWAnv8Of1ykp.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/null" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://humbledong.github.io/undefined/505826b8.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Redis进阶&amp;url=https://humbledong.github.io/undefined/505826b8.html&amp;pic=https://s2.loli.net/2024/01/08/zNxebMYtJmv86PX.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://humbledong.github.io" target="_blank">七岁就很浪</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Redis/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Redis<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/RDB/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>RDB<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/AOF/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AOF<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/01/08/zNxebMYtJmv86PX.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/undefined/fe29e710.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/VtQCes3u8Rk1Ixg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Redis基础</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/undefined/fe29e710.html" title="Redis基础"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/VtQCes3u8Rk1Ixg.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-07-28</div><div class="title">Redis基础</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/06/tvBb7V3ND9Y6hIc.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cdn.jsdelivr.net/gh/zhheo/Sticker-Heo@latest/Sticker-100/出家人.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">这有关于<b style="color:#fff">Java</b>相关的问题和看法，还有<b style="color:#fff">喜欢的东西的看法和</b>和<b style="color:#fff">分享</b>。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">小东</h1><div class="author-info__desc">道阻且长 行则将至</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/humbleDong" target="_blank" title="Github"></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/608736096" target="_blank" title="BiliBili"></a></div></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Reids%E8%BF%9B%E9%98%B6"><span class="toc-number">1.</span> <span class="toc-text">Reids进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis-conf-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">Redis.conf 配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-number">1.2.</span> <span class="toc-text">Redis持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB%EF%BC%88Redis-DataBase%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">RDB（Redis DataBase）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF%EF%BC%88Append-Only-File%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">AOF（Append  Only  File）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83"><span class="toc-number">1.3.</span> <span class="toc-text">Redis订阅发布</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">Redis主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.4.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.2.</span> <span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.3.</span> <span class="toc-text">主从复制原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%95%E6%9C%BA%E5%90%8E%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E4%B8%BB%E6%9C%BA"><span class="toc-number">1.4.4.</span> <span class="toc-text">宕机后手动配置主机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.5.</span> <span class="toc-text">哨兵模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E5%92%8C%E9%9B%AA%E5%B4%A9"><span class="toc-number">1.5.</span> <span class="toc-text">Redis缓存穿透和雪崩</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%EF%BC%9A"><span class="toc-number">1.5.1.</span> <span class="toc-text">缓存穿透：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%EF%BC%9A"><span class="toc-number">1.5.2.</span> <span class="toc-text">缓存击穿：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%EF%BC%9A"><span class="toc-number">1.5.3.</span> <span class="toc-text">缓存雪崩：</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/undefined/505826b8.html" title="Redis进阶"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/zNxebMYtJmv86PX.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis进阶"/></a><div class="content"><a class="title" href="/undefined/505826b8.html" title="Redis进阶">Redis进阶</a><time datetime="2023-08-01T00:14:20.000Z" title="发表于 2023-08-01 08:14:20">2023-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/fe29e710.html" title="Redis基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2024/01/08/VtQCes3u8Rk1Ixg.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis基础"/></a><div class="content"><a class="title" href="/undefined/fe29e710.html" title="Redis基础">Redis基础</a><time datetime="2023-07-28T10:14:20.000Z" title="发表于 2023-07-28 18:14:20">2023-07-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/5c455fd5.html" title="Linux基本安装"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/07/06/uN2IXS9krFCVgQH.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基本安装"/></a><div class="content"><a class="title" href="/undefined/5c455fd5.html" title="Linux基本安装">Linux基本安装</a><time datetime="2023-07-04T05:14:20.000Z" title="发表于 2023-07-04 13:14:20">2023-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/455e6e94.html" title="Linux基础"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/07/06/uN2IXS9krFCVgQH.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux基础"/></a><div class="content"><a class="title" href="/undefined/455e6e94.html" title="Linux基础">Linux基础</a><time datetime="2023-07-03T04:14:20.000Z" title="发表于 2023-07-03 12:14:20">2023-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/undefined/ced26210.html" title="MyBatis-Plus代码生成器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://s2.loli.net/2023/06/10/Jy7ktbDc6LRPWdn.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MyBatis-Plus代码生成器"/></a><div class="content"><a class="title" href="/undefined/ced26210.html" title="MyBatis-Plus代码生成器">MyBatis-Plus代码生成器</a><time datetime="2023-06-10T00:10:20.000Z" title="发表于 2023-06-10 08:10:20">2023-06-10</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/fish.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2024 By <a class="footer-bar-link" href="/" title="小东" target="_blank">小东</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">8</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">我的</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.cnblogs.com/qisui/" title="博客园"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/blog.ico" alt="博客园"/><span class="back-menu-item-text">博客园</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">常用</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.processon.com/" title="processon画图"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/processon.ico" alt="processon画图"/><span class="back-menu-item-text">processon画图</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/bangumis/"><i class="anzhiyufont anzhiyu-icon-bilibili faa-tada" style="font-size: 0.9em;"></i><span> 追番页</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/air-conditioner/"><i class="anzhiyufont anzhiyu-icon-fan faa-tada" style="font-size: 0.9em;"></i><span> 小空调</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AOF/" style="font-size: 0.88rem;">AOF<sup>1</sup></a><a href="/tags/AOP/" style="font-size: 0.88rem;">AOP<sup>1</sup></a><a href="/tags/Ajax/" style="font-size: 0.88rem;">Ajax<sup>1</sup></a><a href="/tags/Druid/" style="font-size: 0.88rem;">Druid<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>2</sup></a><a href="/tags/IoC/" style="font-size: 0.88rem;">IoC<sup>1</sup></a><a href="/tags/JSON/" style="font-size: 0.88rem;">JSON<sup>1</sup></a><a href="/tags/JSP/" style="font-size: 0.88rem;">JSP<sup>1</sup></a><a href="/tags/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 0.88rem;">Java多线程<sup>1</sup></a><a href="/tags/Java%E8%BF%9B%E9%98%B6/" style="font-size: 0.88rem;">Java进阶<sup>2</sup></a><a href="/tags/Linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" style="font-size: 0.88rem;">Linux基本命令<sup>1</sup></a><a href="/tags/Linux%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">Linux基础<sup>1</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>1</sup></a><a href="/tags/MyBatis-plus/" style="font-size: 0.88rem;">MyBatis-plus<sup>2</sup></a><a href="/tags/MySQL%E5%9F%BA%E7%A1%80/" style="font-size: 0.88rem;">MySQL基础<sup>1</sup></a><a href="/tags/Mybatis/" style="font-size: 0.88rem;">Mybatis<sup>1</sup></a><a href="/tags/RDB/" style="font-size: 0.88rem;">RDB<sup>1</sup></a><a href="/tags/Redis/" style="font-size: 0.88rem;">Redis<sup>2</sup></a><a href="/tags/RestFul/" style="font-size: 0.88rem;">RestFul<sup>1</sup></a><a href="/tags/Servlet/" style="font-size: 0.88rem;">Servlet<sup>1</sup></a><a href="/tags/Shiro/" style="font-size: 0.88rem;">Shiro<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>1</sup></a><a href="/tags/SpringBoot-CRUD/" style="font-size: 0.88rem;">SpringBoot-CRUD<sup>1</sup></a><a href="/tags/SpringBoot%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">SpringBoot原理<sup>1</sup></a><a href="/tags/SpringMVC/" style="font-size: 0.88rem;">SpringMVC<sup>1</sup></a><a href="/tags/SpringSecurity/" style="font-size: 0.88rem;">SpringSecurity<sup>1</sup></a><a href="/tags/Spring%E4%BA%8B%E5%8A%A1/" style="font-size: 0.88rem;">Spring事务<sup>1</sup></a><a href="/tags/Swagger/" style="font-size: 0.88rem;">Swagger<sup>1</sup></a><a href="/tags/Thymeleaf/" style="font-size: 0.88rem;">Thymeleaf<sup>1</sup></a><a href="/tags/Tomcat/" style="font-size: 0.88rem;">Tomcat<sup>1</sup></a><a href="/tags/Yaml/" style="font-size: 0.88rem;">Yaml<sup>1</sup></a><a href="/tags/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 0.88rem;">cron表达式<sup>1</sup></a><a href="/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/" style="font-size: 0.88rem;">代码生成器<sup>1</sup></a><a href="/tags/%E5%9B%BD%E9%99%85%E5%8C%96/" style="font-size: 0.88rem;">国际化<sup>1</sup></a><a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 0.88rem;">安全<sup>1</sup></a><a href="/tags/%E5%AE%9A%E6%97%B6task/" style="font-size: 0.88rem;">定时task<sup>1</sup></a><a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 0.88rem;">年度总结<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5task/" style="font-size: 0.88rem;">异步task<sup>1</sup></a><a href="/tags/%E6%8B%A6%E6%88%AA%E5%99%A8/" style="font-size: 0.88rem;">拦截器<sup>2</sup></a><a href="/tags/%E9%82%AE%E4%BB%B6task/" style="font-size: 0.88rem;">邮件task<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/6/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 小东 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("04/6/2022 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "/img/down.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
